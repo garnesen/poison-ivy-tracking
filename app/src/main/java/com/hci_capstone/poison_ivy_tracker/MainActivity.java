@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     private void buildFragmentsList() {
         fragments = new ArrayList<>(5);
 
-        Fragment reportFragment = new Fragment();
+        Fragment reportFragment = new ReportFragment();
         Fragment identifyFragment = new Fragment();
         Fragment leaderboardsFragment = new Fragment();
         Fragment aboutFragment = new Fragment();
