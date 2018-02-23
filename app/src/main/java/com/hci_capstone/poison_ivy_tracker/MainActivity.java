@@ -73,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
         fragments = new ArrayList<>(5);
 
         Fragment reportFragment = new ReportFragment();
-        Fragment identifyFragment = new Fragment();
-        Fragment leaderboardsFragment = new Fragment();
-        Fragment aboutFragment = new Fragment();
+        Fragment identifyFragment = new IdentifyFragment();
+        Fragment leaderboardsFragment = new LeaderboardFragment();
+        Fragment aboutFragment = new AboutFragment();
         Fragment settingsFragment = new Fragment();
 
         fragments.add(reportFragment);
