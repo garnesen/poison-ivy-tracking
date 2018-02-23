@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.bottombaritem_leaderboards:
                         switchToFragment(FragmentTag.LEADERBOARDS);
                         return true;
-                   case R.id.bottombaritem_about:
-                       switchToFragment(FragmentTag.ABOUT);
+                    case R.id.bottombaritem_about:
+                        switchToFragment(FragmentTag.ABOUT);
                         return true;
                     case R.id.bottombaritem_settings:
                         switchToFragment(FragmentTag.SETTINGS);
