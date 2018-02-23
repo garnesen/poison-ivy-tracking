@@ -3,8 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/poison-ivy-tracker.iml" filepath="$PROJECT_DIR$/poison-ivy-tracker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/poison-ivy-tracking.iml" filepath="$PROJECT_DIR$/poison-ivy-tracking.iml" />
+      <module fileurl="file://C:\Users\Jason\StudioProjects\poison-ivy-tracking\poison-ivy-tracker.iml" filepath="C:\Users\Jason\StudioProjects\poison-ivy-tracking\poison-ivy-tracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/poison-ivy-tracking.iml" filepath="$PROJECT_DIR$/.idea/poison-ivy-tracking.iml" />
+      <module fileurl="file://C:\Users\Jason\StudioProjects\poison-ivy-tracking\poison-ivy-tracking.iml" filepath="C:\Users\Jason\StudioProjects\poison-ivy-tracking\poison-ivy-tracking.iml" />
     </modules>
   </component>
 </project>
