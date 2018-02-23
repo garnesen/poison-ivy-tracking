@@ -19,17 +19,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="@dimen/activity_vertical_margin">
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:id="@+id/report_ivy_presence_radio_group">
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Yes"
-                android:textSize="@dimen/report_answer_text_size"/>
+                android:textSize="@dimen/report_answer_text_size"
+                android:id="@+id/report_ivy_presence_yes"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="No"
-                android:textSize="@dimen/report_answer_text_size"/>
+                android:textSize="@dimen/report_answer_text_size"
+                android:id="@+id/report_ivy_presence_no"/>
         </RadioGroup>
 
         <TextView
@@ -37,28 +40,33 @@
             android:layout_height="wrap_content"
             android:text="What type of poison ivy?"
             android:textSize="@dimen/report_question_text_size"
-            android:visibility="invisible"/>
+            android:visibility="invisible"
+            android:id="@+id/report_ivy_type_text"/>
 
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="invisible">
+            android:visibility="invisible"
+            android:id="@+id/report_ivy_type_radio_group">
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Creeping"
-                android:textSize="@dimen/report_answer_text_size"/>
+                android:textSize="@dimen/report_answer_text_size"
+                android:id="@+id/report_ivy_type_creeping"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Climbing"
-                android:textSize="@dimen/report_answer_text_size"/>
+                android:textSize="@dimen/report_answer_text_size"
+                android:id="@+id/report_ivy_type_climbing"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Shrub"
-                android:textSize="@dimen/report_answer_text_size"/>
+                android:textSize="@dimen/report_answer_text_size"
+            android:id="@+id/report_ivy_type_shrub"/>
         </RadioGroup>
     </LinearLayout>
 
@@ -70,6 +78,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/report_question_text_size"
-        android:paddingHorizontal="20dp"/>
+        android:paddingHorizontal="20dp"
+        android:id="@+id/report_submit"/>
 
 </RelativeLayout>
