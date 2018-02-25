@@ -3,7 +3,7 @@
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">12sp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="report_question_text_size">32sp</dimen>
-    <dimen name="report_answer_text_size">32sp</dimen>
+    <dimen name="report_question_text_size">18sp</dimen>
+    <dimen name="report_answer_text_size">18sp</dimen>
 </resources>
 
