@@ -1,84 +1,296 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/activity_horizontal_margin">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <ToggleButton
+        android:id="@+id/report_yes_button"
+        android:tag="yes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toTopOf="@+id/guideline1"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toStartOf="@+id/report_no_button"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider1"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="@dimen/toggle_button_percent_width" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Is there poison ivy?"
-            android:textSize="@dimen/report_question_text_size"/>
+    <ToggleButton
+        android:id="@+id/report_no_button"
+        android:tag="no"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toTopOf="@+id/guideline1"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/report_yes_button"
+        app:layout_constraintTop_toBottomOf="@+id/divider1"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="@dimen/toggle_button_percent_width" />
 
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:id="@+id/report_ivy_presence_radio_group">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yes"
-                android:textSize="@dimen/report_answer_text_size"
-                android:id="@+id/report_ivy_presence_yes"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No"
-                android:textSize="@dimen/report_answer_text_size"
-                android:id="@+id/report_ivy_presence_no"/>
-        </RadioGroup>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="What type of poison ivy?"
-            android:textSize="@dimen/report_question_text_size"
-            android:visibility="invisible"
-            android:id="@+id/report_ivy_type_text"/>
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="invisible"
-            android:id="@+id/report_ivy_type_radio_group">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Creeping"
-                android:textSize="@dimen/report_answer_text_size"
-                android:id="@+id/report_ivy_type_creeping"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Climbing"
-                android:textSize="@dimen/report_answer_text_size"
-                android:id="@+id/report_ivy_type_climbing"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Shrub"
-                android:textSize="@dimen/report_answer_text_size"
-            android:id="@+id/report_ivy_type_shrub"/>
-        </RadioGroup>
-    </LinearLayout>
-
-    <Button
+    <TextView
+        android:id="@+id/report_question_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        android:enabled="false"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="@dimen/report_question_text_size"
-        android:paddingHorizontal="20dp"
-        android:id="@+id/report_submit"/>
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Is there poison ivy?"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+    <View
+        android:id="@+id/divider1"
+        style="@style/Divider"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/report_question_1" />
+
+    <TextView
+        android:id="@+id/report_question_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="What type of poison ivy?"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline1" />
+
+    <ToggleButton
+        android:id="@+id/report_shrub_button"
+        android:tag="shrub"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:enabled="false"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/report_climbing_button"
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
+        app:layout_constraintVertical_bias="0.00999999"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="@dimen/toggle_button_percent_width" />
+
+    <ToggleButton
+        android:id="@+id/report_climbing_button"
+        android:tag="climbing"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:enabled="false"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toStartOf="@+id/report_shrub_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/report_creeping_button"
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
+        app:layout_constraintVertical_bias="0.00999999"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="@dimen/toggle_button_percent_width" />
+
+    <ToggleButton
+        android:id="@+id/report_creeping_button"
+        android:tag="creeping"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:enabled="false"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toStartOf="@+id/report_climbing_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="@dimen/toggle_button_percent_width" />
+
+    <View
+        android:id="@+id/divider2"
+        style="@style/Divider"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/report_question_2"
+        android:alpha="@dimen/report_view_disabled_alpha" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.28" />
+
+    <TextView
+        android:id="@+id/report_question_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Take a picture? (Optional)"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+    <ToggleButton
+        android:id="@+id/report_camera_button"
+        android:tag="camera"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:enabled="false"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/toggle_selector"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="@dimen/toggle_button_percent_width" />
+
+    <View
+        android:id="@+id/divider3"
+        style="@style/Divider"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/report_question_3"
+        android:alpha="@dimen/report_view_disabled_alpha" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.58" />
+
+    <TextView
+        android:id="@+id/report_yes_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yes"
+        app:layout_constraintEnd_toEndOf="@+id/report_yes_button"
+        app:layout_constraintStart_toStartOf="@+id/report_yes_button"
+        app:layout_constraintTop_toBottomOf="@+id/report_yes_button" />
+
+    <TextView
+        android:id="@+id/report_no_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No"
+        app:layout_constraintEnd_toEndOf="@+id/report_no_button"
+        app:layout_constraintStart_toStartOf="@+id/report_no_button"
+        app:layout_constraintTop_toBottomOf="@+id/report_no_button" />
+
+    <TextView
+        android:id="@+id/report_creeping_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:text="Creeping"
+        app:layout_constraintEnd_toEndOf="@+id/report_creeping_button"
+        app:layout_constraintStart_toStartOf="@+id/report_creeping_button"
+        app:layout_constraintTop_toBottomOf="@+id/report_creeping_button" />
+
+    <TextView
+        android:id="@+id/report_climbing_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:text="Climbing"
+        app:layout_constraintEnd_toEndOf="@+id/report_climbing_button"
+        app:layout_constraintStart_toStartOf="@+id/report_climbing_button"
+        app:layout_constraintTop_toBottomOf="@+id/report_climbing_button" />
+
+    <TextView
+        android:id="@+id/report_shrub_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:text="Shrub"
+        app:layout_constraintEnd_toEndOf="@+id/report_shrub_button"
+        app:layout_constraintStart_toStartOf="@+id/report_shrub_button"
+        app:layout_constraintTop_toBottomOf="@+id/report_shrub_button" />
+
+    <TextView
+        android:id="@+id/report_camera_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:text="Camera"
+        app:layout_constraintEnd_toEndOf="@+id/report_camera_button"
+        app:layout_constraintStart_toStartOf="@+id/report_camera_button"
+        app:layout_constraintTop_toBottomOf="@+id/report_camera_button" />
+
+    <Button
+        android:id="@+id/report_submit_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:enabled="false"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="@dimen/submit_button_percent_width" />
+
+</android.support.constraint.ConstraintLayout>

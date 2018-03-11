@@ -3,7 +3,13 @@
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">12sp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Report fragment dimens-->
     <dimen name="report_question_text_size">18sp</dimen>
-    <dimen name="report_answer_text_size">18sp</dimen>
+    <dimen name="report_answer_text_size">14sp</dimen>
+    <dimen name="toggle_button_percent_width">0.17</dimen>
+    <dimen name="submit_button_percent_width">0.70</dimen>
+    <dimen name="report_view_disabled_alpha">0.20</dimen>
+    <dimen name="report_fade_animation_duration">500</dimen>
 </resources>
 
