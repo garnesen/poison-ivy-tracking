@@ -127,6 +127,7 @@ public class ReportFragment extends Fragment {
                 }
                 else if (!isChecked && currentImageFile != null) {
                     deleteCurrentImage();
+                    Toast.makeText(getContext(), "Image deleted.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

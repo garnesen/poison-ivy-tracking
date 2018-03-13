@@ -5,6 +5,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -17,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
 
     enum FragmentTag {
         REPORT, IDENTIFY, LEADERBOARDS, ABOUT, SETTINGS
+    }
+
+    static {
+        // Set dark theme to always be on.
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
 
     @Override

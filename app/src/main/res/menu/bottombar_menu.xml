@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/bottombaritem_report"
-        android:icon="@android:drawable/ic_menu_report_image"
+        android:icon="@drawable/ic_creeping_unchecked"
         android:title="Report"
         app:showAsAction="ifRoom"/>
 
@@ -28,7 +28,7 @@
 
     <item
         android:id="@+id/bottombaritem_settings"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@drawable/ic_settings_black_24dp"
         android:title="Settings"
         app:showAsAction="ifRoom"/>
 

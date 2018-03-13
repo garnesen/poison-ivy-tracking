@@ -27,8 +27,7 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:paddingTop="10dp"
-                    android:text="What is poison-ivy-tracker?"
-                    android:textColor="@color/colorPrimary" />
+                    android:text="What is poison-ivy-tracker?" />
 
                 <TextView
                     android:id="@+id/Body-WhatIs"
@@ -40,8 +39,6 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:text="poison-ivy-tracker is a citizen science projected led by Dr. John Jelesko of the Virginia Tech Plant Pathology, Physiology, and Weed science department. The goal of this application is to encourage hikers of the Appalician Trail to record the locations of Poison Ivy that they see (and don't see) to better understand the growing habits of poison ivy."
-                    android:textColor="@android:color/black"
-                    android:textColorLink="@android:color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -54,7 +51,6 @@
                     android:paddingBottom="30dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:textColor="@color/colorPrimary"
                     android:text="Why Should I Help?" />
 
                 <TextView
@@ -67,8 +63,7 @@
                     android:paddingBottom="80dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:text="Every time you make a record, you are contributing valuable scientific information to a database. This information is used to analyze growth patterns of poison ivy to better understand its growth habits. As atmospheric carbon levels rise, poison ivy is projected to grow faster and produce more urushiol (the chemical that causes allergic reactions). A strong understanding of poison ivy's behavior will help to counteract its projected impact."
-                    android:textColor="@android:color/black" />
+                    android:text="Every time you make a record, you are contributing valuable scientific information to a database. This information is used to analyze growth patterns of poison ivy to better understand its growth habits. As atmospheric carbon levels rise, poison ivy is projected to grow faster and produce more urushiol (the chemical that causes allergic reactions). A strong understanding of poison ivy's behavior will help to counteract its projected impact." />
 
                 <Button
                     android:id="@+id/linkButton"
