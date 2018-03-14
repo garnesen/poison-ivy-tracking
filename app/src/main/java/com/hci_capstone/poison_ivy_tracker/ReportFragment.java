@@ -33,7 +33,9 @@ import static android.app.Activity.RESULT_OK;
  * Fragment of the bottom navigation bar that allows the user to submit a report.
  *
  * TODO: If the user takes a picture and closes the app without being submitted, that image is still saved.
- * TODO: Add custom icon images.
+ * TODO: Scale captured image sizes down.
+ * TODO: Get user location.
+ * TODO: Handle DB queries in fragment or main activity?
  */
 public class ReportFragment extends Fragment {
 
