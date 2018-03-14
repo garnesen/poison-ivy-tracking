@@ -113,11 +113,11 @@ public class IdentifyFragment extends Fragment {
                 if (climbingDescription.getVisibility() == View.GONE) {
                     // it's collapsed - expand it
                     expand(climbingDescription);
+                    collapseAllOthers(climbingDescription);
                     climbingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24px);
                 } else {
                     // it's expanded - collapse it
                     collapse(climbingDescription);
-                    collapseAllOthers(climbingDescription);
                     climbingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
                 }
 
