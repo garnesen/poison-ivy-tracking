@@ -85,6 +85,7 @@
                     android:gravity="left"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
+                    android:paddingBottom="10dp"
                     android:text="There are two primary times to report data, at an Appalician Trail blaze marker, or whenever you see poison ivy. When you encounter a blaze, try to take a quick look around to see whether or not poison ivy is present, and indicate your findings on the report tab. Knowing where poison ivy is not is just as important as knowing where it is! Blazes are white painted markers that are typically found on trees along the AT. If you need help identifying a blaze, an example picture is provided below:"
                     android:textSize="16sp" />
 
