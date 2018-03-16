@@ -27,7 +27,7 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:paddingTop="10dp"
-                    android:text="What is poison-ivy-tracker?" />
+                    android:text="What is Ivy Tracker?" />
 
                 <TextView
                     android:id="@+id/Body-WhatIs"
@@ -38,7 +38,7 @@
                     android:paddingBottom="80dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:text="poison-ivy-tracker is a citizen science projected led by Dr. John Jelesko of the Virginia Tech Plant Pathology, Physiology, and Weed science department. The goal of this application is to encourage hikers of the Appalician Trail to record the locations of Poison Ivy that they see (and don't see) to better understand the growing habits of poison ivy."
+                    android:text="Ivy Tracker is a citizen science projected led by Dr. John Jelesko of the Virginia Tech Plant Pathology, Physiology, and Weed science department. The goal of this application is to encourage hikers of the Appalician Trail to record the locations of Poison Ivy that they see (and don't see) to better understand the growing habits of poison ivy."
                     android:textSize="16sp" />
 
                 <TextView
@@ -64,6 +64,39 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:text="Every time you make a record, you are contributing valuable scientific information to a database. This information is used to analyze growth patterns of poison ivy to better understand its growth habits. As atmospheric carbon levels rise, poison ivy is projected to grow faster and produce more urushiol (the chemical that causes allergic reactions). A strong understanding of poison ivy's behavior will help to counteract its projected impact." />
+
+                <TextView
+                    android:id="@+id/Header-How-Often"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoSizeMinTextSize="@dimen/activity_horizontal_margin"
+                    android:gravity="center"
+                    android:textSize="28sp"
+                    android:paddingBottom="30dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="How Often Do I Report?" />
+
+                <TextView
+                    android:id="@+id/Body-How-Often"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoSizeMinTextSize="@dimen/activity_horizontal_margin"
+                    android:gravity="left"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="There are two primary times to report data, at an Appalician Trail blaze marker, or whenever you see poison ivy. When you encounter a blaze, try to take a quick look around to see whether or not poison ivy is present, and indicate your findings on the report tab. Knowing where poison ivy is not is just as important as knowing where it is! Blazes are white painted markers that are typically found on trees along the AT. If you need help identifying a blaze, an example picture is provided below:"
+                    android:textSize="16sp" />
+
+
+                <ImageView
+                    android:id="@+id/Blaze"
+                    android:layout_width="match_parent"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    android:layout_height="300sp"
+                    app:srcCompat="@drawable/trail_blaze" />
 
                 <Button
                     android:id="@+id/linkButton"
