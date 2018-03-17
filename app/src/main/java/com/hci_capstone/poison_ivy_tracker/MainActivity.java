@@ -17,6 +17,8 @@ import java.util.List;
 import im.delight.android.location.SimpleLocation;
 
 // TODO: Create an error page if the user denies location services.
+// TODO: Create listener for ReportFragment to receive reports.
+// TODO: Add reports to room database.
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;

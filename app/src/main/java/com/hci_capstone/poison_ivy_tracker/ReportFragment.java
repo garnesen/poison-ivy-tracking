@@ -34,8 +34,7 @@ import static android.app.Activity.RESULT_OK;
  *
  * TODO: If the user takes a picture and closes the app without being submitted, that image is still saved.
  * TODO: Scale captured image sizes down.
- * TODO: Get user location.
- * TODO: Handle DB queries in fragment or main activity?
+ * TODO: Allow multiple pictures to be taken?
  */
 public class ReportFragment extends Fragment {
 
