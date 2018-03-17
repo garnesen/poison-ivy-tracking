@@ -6,6 +6,7 @@ import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,7 @@ import android.widget.TextView;
 import java.io.Console;
 
 /**
- * Created by douglasbotello on 2/23/18.
+ * Created by Jason Merewitz
  */
 
 public class IdentifyFragment extends Fragment {
@@ -27,6 +28,7 @@ public class IdentifyFragment extends Fragment {
     ImageView ivyTitleImg, creepingTitleImg, climbingTitleImg, shrubTitleImg;
     ImageView ivyDescriptionImg, creepingDescriptionImg,climbingDescriptionImg, shrubDescriptionImg;
     CardView cvIvy, cvCreeping, cvClimbing, cvShrub;
+    TextView climbingText, shrubText;
 
     ValueAnimator mAnimator;
 
@@ -39,6 +41,12 @@ public class IdentifyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_identify, container, false);
+        //Set the text for the descriptions
+        climbingText = view.findViewById(R.id.climbingText);
+        shrubText = view.findViewById(R.id.shrubText);
+
+        climbingText.setText(Html.fromHtml(getString(R.string.climbingDescription)));
+        shrubText.setText(Html.fromHtml(getString(R.string.shrubDescription)));;
 
         // Get the elements for each card and set the arrow
 
@@ -83,11 +91,12 @@ public class IdentifyFragment extends Fragment {
                     expand(ivyDescription);
                     collapseAllOthers(ivyDescription);
                     ivyTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24px);
-                } else {
-                    // it's expanded - collapse it
-                    collapse(ivyDescription);
-                    ivyTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
                 }
+//                else {
+//                    // it's expanded - collapse it
+//                    collapse(ivyDescription);
+//                    ivyTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
+//                }
 
             }
         });
@@ -99,11 +108,12 @@ public class IdentifyFragment extends Fragment {
                     expand(creepingDescription);
                     collapseAllOthers(creepingDescription);
                     creepingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24px);
-                } else {
-                    // it's expanded - collapse it
-                    collapse(creepingDescription);
-                    creepingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
                 }
+//                else {
+//                    // it's expanded - collapse it
+//                    collapse(creepingDescription);
+//                    creepingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
+//                }
 
             }
         });
@@ -115,11 +125,12 @@ public class IdentifyFragment extends Fragment {
                     expand(climbingDescription);
                     collapseAllOthers(climbingDescription);
                     climbingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24px);
-                } else {
-                    // it's expanded - collapse it
-                    collapse(climbingDescription);
-                    climbingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
                 }
+//                else {
+//                    // it's expanded - collapse it
+//                    collapse(climbingDescription);
+//                    climbingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
+//                }
 
             }
         });
@@ -131,11 +142,12 @@ public class IdentifyFragment extends Fragment {
                     expand(shrubDescription);
                     collapseAllOthers(shrubDescription);
                     shrubTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24px);
-                } else {
-                    // it's expanded - collapse it
-                    collapse(shrubDescription);
-                    shrubTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
                 }
+//                else {
+//                    // it's expanded - collapse it
+//                    collapse(shrubDescription);
+//                    shrubTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
+//                }
 
             }
         });

@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
-        <!--Add another linear layout for top and bottom piece. Also Look at relative layout-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -24,10 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:minHeight="48dp">
-                <!--android:orientation="horizontal"-->
-                <!--android:paddingEnd="16dp"-->
-                <!--android:paddingStart="16dp">-->
-
                 <TextView
                     android:id="@+id/ivy_title_text"
                     android:layout_width="match_parent"
@@ -55,6 +50,7 @@
                 android:orientation="horizontal"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
+                android:paddingBottom="10dp"
                 android:visibility="gone">
 
 
@@ -62,7 +58,7 @@
                     android:id="@+id/ivy_description_img"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"
+                    android:layout_gravity="center"
                     android:layout_weight="0.1"
                     android:background="@drawable/identify_poison_ivy"
                     />
@@ -125,9 +121,10 @@
                     android:id="@+id/creeping_description_img"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"
+                    android:layout_gravity="center"
                     android:layout_weight="0.1"
                     android:background="@drawable/identify_poison_ivy"
+                    android:paddingBottom="5dp"
                     />
 
             </LinearLayout>
@@ -144,7 +141,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
-        <!--Add another linear layout for top and bottom piece. Also Look at relative layout-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -189,21 +185,18 @@
                     android:id="@+id/climbing_description_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"
+                    android:layout_gravity="center"
                     android:layout_weight="0.1"
                     android:background="@drawable/climbing_ivy"
                     />
 
                 <TextView
+                    android:id="@+id/climbingText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:text="•If leaves are present you will see the left right pattern
-                    \n• If there are no leaves than you can tell it is poison ivy by the hairy vine
-                    \n•Can often climb for an amount and then branch out looking for sun
-                    \n•Often will be over the trail where someone would push the branch out of the way and have a rude surprise in the morning"/>
-
+                    android:layout_marginTop="10dp" />
+                    <!--android:text="@string/climbingDescription" />-->
 
             </LinearLayout>
 
@@ -219,7 +212,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
-        <!--Add another linear layout for top and bottom piece. Also Look at relative layout-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -270,13 +262,11 @@
                     />
 
                 <TextView
+                    android:id="@+id/shrubText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:text="•Shrubs will grow a host up and have a shrub at top
-                    \n•They can climb up  buildings, fences,signs and more
-                    \n•Can very rarely attach to their own vines and grow higher"/>
+                    android:layout_marginTop="10dp"/>
 
 
             </LinearLayout>
