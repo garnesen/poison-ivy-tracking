@@ -7,6 +7,8 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import java.util.List;
+
 @Database(entities = {Report.class}, version = 1, exportSchema = false)
 @TypeConverters({DateTypeConverter.class})
 public abstract class ReportDatabase extends RoomDatabase {
@@ -43,14 +45,51 @@ public abstract class ReportDatabase extends RoomDatabase {
     }
 
     /**
+     * Get all reports in the database.
+     * @param callback
+     */
+    public void getAll(OnGetAllCompleted callback) {
+        new GetReportsInBackground(callback).execute();
+    }
+
+    /**
      * An async task to insert reports into the database in the background.
      */
-    private class AddReportsInBackground extends AsyncTask<Report, Void, Boolean> {
+    private static class AddReportsInBackground extends AsyncTask<Report, Void, Boolean> {
 
         @Override
         protected Boolean doInBackground(Report... reports) {
             INSTANCE.reportDAO().insertReports(reports);
             return true;
         }
+    }
+
+    /**
+     * An async task to get all reports from the database in the background.
+     */
+    private static class GetReportsInBackground extends AsyncTask<Void, Void, List<Report>> {
+
+        private OnGetAllCompleted callback;
+
+        public GetReportsInBackground(OnGetAllCompleted callback) {
+            this.callback = callback;
+        }
+
+        @Override
+        protected List<Report> doInBackground(Void... params) {
+            return INSTANCE.reportDAO().getAll();
+        }
+
+        @Override
+        protected void onPostExecute(List<Report> reports) {
+            callback.onGetAllCompleted(reports);
+        }
+    }
+
+    /**
+     * Callback interface for getAll.
+     */
+    public interface OnGetAllCompleted {
+        void onGetAllCompleted(List<Report> reports);
     }
 }
