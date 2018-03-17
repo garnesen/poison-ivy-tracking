@@ -11,7 +11,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.MenuItem;
 
+import com.hci_capstone.poison_ivy_tracker.database.Report;
+import com.hci_capstone.poison_ivy_tracker.database.ReportDatabase;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import im.delight.android.location.SimpleLocation;
@@ -19,7 +23,7 @@ import im.delight.android.location.SimpleLocation;
 // TODO: Create an error page if the user denies location services.
 // TODO: Create listener for ReportFragment to receive reports.
 // TODO: Add reports to room database.
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ReportFragment.OnReportSubmittedListener {
 
     private BottomNavigationView bottomNavigationView;
     private List<Fragment> fragments;
@@ -126,6 +130,24 @@ public class MainActivity extends AppCompatActivity {
      */
     private boolean hasLocationPermissions() {
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    public void onReportSubmitted(boolean ivyPresent, String ivyType, String imageLocation) {
+        Date curDate = new Date();
+        ivyType = ivyPresent ? ivyType : "absent";
+        String uid = InstanceID.getInstance(getApplicationContext()).getId();
+
+        Report report = new Report(
+                uid,
+                ivyType,
+                (float) location.getLatitude(),
+                (float) location.getLongitude(),
+                curDate,
+                imageLocation
+        );
+
+        ReportDatabase.getDatabase(getApplicationContext()).insertReports(report);
     }
 
     @Override

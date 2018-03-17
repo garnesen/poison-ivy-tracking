@@ -3,6 +3,7 @@ package com.hci_capstone.poison_ivy_tracker;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,10 +48,27 @@ public class ReportFragment extends Fragment {
 
     File currentImageFile;
 
+    OnReportSubmittedListener reportCallback;
+
     final String AUTHORITY = "com.hci_capstone.poison_ivy_tracker.fileprovider";
 
     public ReportFragment() {
 
+    }
+
+    public interface OnReportSubmittedListener {
+        void onReportSubmitted(boolean ivyPresent, String ivyTpe, String imageLocation);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            reportCallback = (OnReportSubmittedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnReportSubmittedListener");
+        }
     }
 
     @Override
@@ -136,13 +154,14 @@ public class ReportFragment extends Fragment {
         submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String poisonIvyPresent = question1Group.getCurSelectedTag();
-                String poisonIvyType = question2Group.getCurSelectedTag();
-                String imgName = currentImageFile != null ? currentImageFile.getName() : null;
+                boolean ivyPresent = question1Group.getCurSelectedTag().equals("yes");
+                String ivyType = question2Group.getCurSelectedTag();
+                String imageLocation = currentImageFile != null ? currentImageFile.getAbsolutePath() : null;
 
-                Log.v("IVY_REPORT", "Info submitted: " + poisonIvyPresent + " " + poisonIvyType + " " + imgName);
+                reportCallback.onReportSubmitted(ivyPresent, ivyType, imageLocation);
+
+                Log.v("IVY_REPORT", "Info submitted: " + ivyPresent + " " + ivyType + " " + imageLocation);
                 Toast.makeText(getContext(), "Report submitted!", Toast.LENGTH_SHORT).show();
-
                 reset();
             }
         });
