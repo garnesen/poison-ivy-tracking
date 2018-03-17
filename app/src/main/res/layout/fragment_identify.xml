@@ -256,7 +256,7 @@
                     android:id="@+id/shrub_description_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"
+                    android:layout_gravity="center"
                     android:layout_weight="0.1"
                     android:background="@drawable/identify_ivy_shrub"
                     />
