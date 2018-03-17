@@ -93,4 +93,16 @@ public class Report {
     public void setImageLocation(String imageLocation) {
         this.imageLocation = imageLocation;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("UID: ").append(uid).append(" | ");
+        sb.append("PlantType: ").append(plantType).append(" | ");
+        sb.append("Latitude: ").append(latitude).append(" | ");
+        sb.append("Longitude: ").append(longitude).append(" | ");
+        sb.append("Date: ").append(date.toString()).append(" | ");
+        sb.append("ImageLocation: ").append(imageLocation);
+        return sb.toString();
+    }
 }
