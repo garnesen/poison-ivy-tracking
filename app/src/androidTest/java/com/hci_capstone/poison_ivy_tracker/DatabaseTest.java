@@ -46,8 +46,8 @@ public class DatabaseTest {
         Report testReport1 = new Report("uid1", "creeping", 10.0f, -20.5f, testDate1, "pics");
         Report testReport2 = new Report("uid2", "climbing", 5.0f, -100.5f, testDate2, "photos");
 
-        reportDAO.insertReport(testReport1);
-        reportDAO.insertReport(testReport2);
+        reportDAO.insertReports(testReport1);
+        reportDAO.insertReports(testReport2);
 
         List<Report> reports = reportDAO.getAll();
         assertEquals(2, reports.size());

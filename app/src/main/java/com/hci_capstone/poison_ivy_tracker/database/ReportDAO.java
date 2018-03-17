@@ -11,7 +11,7 @@ import java.util.List;
 public interface ReportDAO {
 
     @Insert
-    void insertReport(Report report);
+    void insertReports(Report... report);
 
     @Delete
     void deleteReport(Report report);
