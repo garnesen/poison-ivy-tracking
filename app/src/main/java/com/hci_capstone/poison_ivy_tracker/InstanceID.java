@@ -3,6 +3,8 @@ package com.hci_capstone.poison_ivy_tracker;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.hci_capstone.poison_ivy_tracker.exceptions.UninitializedSingletonException;
+
 import java.util.UUID;
 
 /**
@@ -32,15 +34,24 @@ public class InstanceID {
 
     /**
      * Get the instance InstanceID.
-     * @param context
      * @return InstanceID
      */
-    public static InstanceID getInstance(Context context) {
+    public static InstanceID getInstance() {
         if (id == null) {
+            throw new UninitializedSingletonException("You must initialize the singleton before use.");
+        }
+        return id;
+    }
+
+    /**
+     * Initialize the singleton instance.
+     * @param context
+     */
+    public static void init(Context context) {
+        if (id == null) {
+            context = context.getApplicationContext();
             id = new InstanceID(context);
         }
-
-        return id;
     }
 
     /**

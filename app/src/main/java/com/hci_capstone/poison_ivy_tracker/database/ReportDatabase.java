@@ -7,6 +7,8 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.hci_capstone.poison_ivy_tracker.exceptions.UninitializedSingletonException;
+
 import java.util.List;
 
 @Database(entities = {Report.class}, version = 1, exportSchema = false)
@@ -19,14 +21,24 @@ public abstract class ReportDatabase extends RoomDatabase {
 
     /**
      * Get the database as a singleton as it is expensive.
-     * @param context
      * @return the database
      */
-    public static ReportDatabase getDatabase(Context context) {
+    public static ReportDatabase getDatabase() {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(context, ReportDatabase.class, "reports-database").build();
+            throw new UninitializedSingletonException("You must initialize the singleton before use.");
         }
         return INSTANCE;
+    }
+
+    /**
+     * Initialize the singleton instance.
+     * @param context
+     */
+    public static void init(Context context) {
+        if (INSTANCE == null) {
+            context = context.getApplicationContext();
+            INSTANCE = Room.databaseBuilder(context, ReportDatabase.class, "reports-database").build();
+        }
     }
 
     /**

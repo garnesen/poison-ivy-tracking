@@ -43,6 +43,10 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize singletons that require context.
+        ReportDatabase.init(this);
+        InstanceID.init(this);
+
         // New SimpleLocation object, easy access to latitude and longitude.
         location = new SimpleLocation(this);
 
@@ -134,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
     public void onReportSubmitted(boolean ivyPresent, String ivyType, String imageLocation) {
         Date curDate = new Date();
         ivyType = ivyPresent ? ivyType : "absent";
-        String uid = InstanceID.getInstance(getApplicationContext()).getId();
+        String uid = InstanceID.getInstance().getId();
 
         Report report = new Report(
                 uid,
@@ -145,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
                 imageLocation
         );
 
-        ReportDatabase.getDatabase(getApplicationContext()).insertReports(report);
+        ReportDatabase.getDatabase().insertReports(report);
     }
 
     @Override
