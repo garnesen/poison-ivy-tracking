@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
     }
 
     @Override
-    public void onReportSubmitted(boolean ivyPresent, String ivyType, String imageLocation) {
+    public void onReportSubmitted(boolean ivyPresent, String ivyType, List<String> imageLocations) {
         Date curDate = new Date();
         ivyType = ivyPresent ? ivyType : "absent";
         String uid = InstanceID.getInstance().getId();
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
                 (float) location.getLatitude(),
                 (float) location.getLongitude(),
                 curDate,
-                imageLocation
+                imageLocations
         );
 
         ReportDatabase.getDatabase().insertReports(new ReportDatabase.OnInsertCompleted() {

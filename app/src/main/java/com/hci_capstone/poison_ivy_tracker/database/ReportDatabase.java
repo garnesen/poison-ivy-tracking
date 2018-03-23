@@ -13,7 +13,7 @@ import java.util.List;
 
 // TODO: May need to make query methods synchronized.
 @Database(entities = {Report.class}, version = 1, exportSchema = false)
-@TypeConverters({DateTypeConverter.class})
+@TypeConverters({DateTypeConverter.class, ImageListConverter.class})
 public abstract class ReportDatabase extends RoomDatabase {
 
     private static ReportDatabase INSTANCE;

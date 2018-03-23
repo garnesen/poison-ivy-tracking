@@ -25,7 +25,9 @@ import android.widget.ToggleButton;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -57,7 +59,7 @@ public class ReportFragment extends Fragment {
     }
 
     public interface OnReportSubmittedListener {
-        void onReportSubmitted(boolean ivyPresent, String ivyTpe, String imageLocation);
+        void onReportSubmitted(boolean ivyPresent, String ivyTpe, List<String> imageLocation);
     }
 
     @Override
@@ -158,7 +160,12 @@ public class ReportFragment extends Fragment {
                 String ivyType = question2Group.getCurSelectedTag();
                 String imageLocation = currentImageFile != null ? currentImageFile.getAbsolutePath() : null;
 
-                reportCallback.onReportSubmitted(ivyPresent, ivyType, imageLocation);
+                // Temporary code to convert one picture to list
+                List<String> imageLocations = new ArrayList<String>();
+                imageLocations.add(imageLocation);
+                // End Temp Code
+
+                reportCallback.onReportSubmitted(ivyPresent, ivyType, imageLocations);
 
                 Log.v("IVY_REPORT", "Info submitted: " + ivyPresent + " " + ivyType + " " + imageLocation);
                 Toast.makeText(getContext(), "Report submitted!", Toast.LENGTH_SHORT).show();

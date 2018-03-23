@@ -5,6 +5,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Report {
@@ -26,16 +27,16 @@ public class Report {
     @ColumnInfo(name = "date_time")
     private Date date;
 
-    @ColumnInfo(name = "image_location")
-    private String imageLocation;
+    @ColumnInfo(name = "image_locations")
+    private List<String> imageLocations;
 
-    public Report (String uid, String plantType, float latitude, float longitude, Date date, String imageLocation) {
+    public Report (String uid, String plantType, float latitude, float longitude, Date date, List<String> imageLocations) {
         this.uid = uid;
         this.plantType = plantType;
         this.latitude = latitude;
         this.longitude = longitude;
         this.date = date;
-        this.imageLocation = imageLocation;
+        this.imageLocations = imageLocations;
     }
 
     public int getId() {
@@ -86,12 +87,12 @@ public class Report {
         this.date = date;
     }
 
-    public String getImageLocation() {
-        return imageLocation;
+    public List<String> getImageLocations() {
+        return imageLocations;
     }
 
-    public void setImageLocation(String imageLocation) {
-        this.imageLocation = imageLocation;
+    public void setImageLocation(List<String> imageLocations) {
+        this.imageLocations = imageLocations;
     }
 
     @Override
@@ -102,7 +103,7 @@ public class Report {
         sb.append("Latitude: ").append(latitude).append(" | ");
         sb.append("Longitude: ").append(longitude).append(" | ");
         sb.append("Date: ").append(date.toString()).append(" | ");
-        sb.append("ImageLocation: ").append(imageLocation);
+        sb.append("ImageLocation: ").append(imageLocations.toString());
         return sb.toString();
     }
 }
