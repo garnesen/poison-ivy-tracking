@@ -149,7 +149,12 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
                 imageLocation
         );
 
-        ReportDatabase.getDatabase().insertReports(report);
+        ReportDatabase.getDatabase().insertReports(new ReportDatabase.OnInsertCompleted() {
+            @Override
+            public void onInsertCompleted() {
+                // Perform a sync.
+            }
+        }, report);
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.hci_capstone.poison_ivy_tracker.exceptions.UninitializedSingletonExce
 
 import java.util.List;
 
+// TODO: May need to make query methods synchronized.
 @Database(entities = {Report.class}, version = 1, exportSchema = false)
 @TypeConverters({DateTypeConverter.class})
 public abstract class ReportDatabase extends RoomDatabase {
@@ -52,8 +53,8 @@ public abstract class ReportDatabase extends RoomDatabase {
      * Insert reports into the database.
      * @param reports
      */
-    public void insertReports(Report... reports) {
-        new AddReportsInBackground().execute(reports);
+    public void insertReports(OnInsertCompleted callback, Report... reports) {
+        new InsertReportsInBackground(callback).execute(reports);
     }
 
     /**
@@ -67,12 +68,25 @@ public abstract class ReportDatabase extends RoomDatabase {
     /**
      * An async task to insert reports into the database in the background.
      */
-    private static class AddReportsInBackground extends AsyncTask<Report, Void, Boolean> {
+    private static class InsertReportsInBackground extends AsyncTask<Report, Void, Boolean> {
+
+        private OnInsertCompleted callback;
+
+        public InsertReportsInBackground(OnInsertCompleted callback) {
+            this.callback = callback;
+        }
 
         @Override
         protected Boolean doInBackground(Report... reports) {
             INSTANCE.reportDAO().insertReports(reports);
             return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean finished) {
+            if (callback != null) {
+                callback.onInsertCompleted();
+            }
         }
     }
 
@@ -94,7 +108,9 @@ public abstract class ReportDatabase extends RoomDatabase {
 
         @Override
         protected void onPostExecute(List<Report> reports) {
-            callback.onGetAllCompleted(reports);
+            if (callback != null) {
+                callback.onGetAllCompleted(reports);
+            }
         }
     }
 
@@ -103,5 +119,12 @@ public abstract class ReportDatabase extends RoomDatabase {
      */
     public interface OnGetAllCompleted {
         void onGetAllCompleted(List<Report> reports);
+    }
+
+    /**
+     * Callback interface for insert.
+     */
+    public interface OnInsertCompleted{
+        void onInsertCompleted();
     }
 }
