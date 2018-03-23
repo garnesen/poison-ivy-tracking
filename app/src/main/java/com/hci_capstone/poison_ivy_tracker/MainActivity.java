@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.hci_capstone.poison_ivy_tracker.database.Report;
 import com.hci_capstone.poison_ivy_tracker.database.ReportDatabase;
+import com.hci_capstone.poison_ivy_tracker.sync.IvyReportUploadService;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
         ReportDatabase.getDatabase().insertReports(new ReportDatabase.OnInsertCompleted() {
             @Override
             public void onInsertCompleted() {
-                // Perform a sync.
+                IvyReportUploadService.requestSync(getApplicationContext());
             }
         }, report);
     }
