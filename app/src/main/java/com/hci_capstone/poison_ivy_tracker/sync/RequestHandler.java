@@ -8,6 +8,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.hci_capstone.poison_ivy_tracker.R;
 import com.hci_capstone.poison_ivy_tracker.exceptions.UninitializedSingletonException;
 
 import org.json.JSONException;
@@ -22,9 +23,11 @@ public class RequestHandler {
 
     private static RequestHandler INSTANCE;
     private RequestQueue requestQueue;
+    private String serverUrl;
 
     private RequestHandler(Context context) {
         this.requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+        this.serverUrl = context.getString(R.string.server_url);
     }
 
     /**
@@ -95,7 +98,7 @@ public class RequestHandler {
         // Create Request
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
-                "url",
+                serverUrl,
                 json,
                 responseListener,
                 errorListener
