@@ -12,7 +12,7 @@ import com.hci_capstone.poison_ivy_tracker.exceptions.UninitializedSingletonExce
 import java.util.List;
 
 // TODO: May need to make query methods synchronized.
-@Database(entities = {Report.class}, version = 1, exportSchema = false)
+@Database(entities = {Report.class}, version = 2, exportSchema = false)
 @TypeConverters({DateTypeConverter.class, ImageListConverter.class})
 public abstract class ReportDatabase extends RoomDatabase {
 
@@ -38,7 +38,7 @@ public abstract class ReportDatabase extends RoomDatabase {
     public static void init(Context context) {
         if (INSTANCE == null) {
             context = context.getApplicationContext();
-            INSTANCE = Room.databaseBuilder(context, ReportDatabase.class, "reports-database").build();
+            INSTANCE = Room.databaseBuilder(context, ReportDatabase.class, "reports-database").fallbackToDestructiveMigration().build();
         }
     }
 
