@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
         Fragment identifyFragment = new IdentifyFragment();
         Fragment leaderboardsFragment = new LeaderboardFragment();
         Fragment aboutFragment = new AboutFragment();
-        Fragment settingsFragment = new Fragment();
+        Fragment settingsFragment = new SettingsFragment();
 
         fragments.add(reportFragment);
         fragments.add(identifyFragment);
