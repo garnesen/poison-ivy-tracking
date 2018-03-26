@@ -27,11 +27,28 @@ public class SettingsFragment extends Fragment {
 
         String[] settingsList = {"Trail Name (optional)", "Email Address (optional)"};
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(getActivity(), R.layout.simplerow, R.id.rowTextView, settingsList);
+        String trailName;
+        if (getResources().getString(R.string.trailname).equals("")) {
+            trailName = "No Trailname Set";
+        } else {
+            trailName = getResources().getString(R.string.trailname);
+        }
+        String email;
+        if (getResources().getString(R.string.trailname).equals("")) {
+            email = "No Email Set";
+        } else {
+            email = getResources().getString(R.string.email);
+        }
+        String[] settingsList2 = {trailName, email};
+
+        CustomList adapter = new CustomList(getActivity(), settingsList, settingsList2);
 
         ListView listView = (ListView) rootView.findViewById(R.id.SettingsList);
         listView.setAdapter(adapter);
 
         return rootView;
     }
+
+
+
 }
