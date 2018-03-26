@@ -1,0 +1,20 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="Settings">
+
+    <PreferenceCategory
+        android:title="User Data">
+
+        <EditTextPreference
+            android:key="pref_screen_name"
+            android:title="Screen Name"
+            android:summary="Screen name for high score lists." />
+
+        <EditTextPreference
+            android:key="pref_email"
+            android:title="Email"
+            android:summary="A way to contact you if you are a frequent reporter." />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
