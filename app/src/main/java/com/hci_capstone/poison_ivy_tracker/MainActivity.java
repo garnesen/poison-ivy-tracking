@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 
-public class ItchyProjectMain extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     static {
         // Set dark theme to always be on.
@@ -16,7 +16,7 @@ public class ItchyProjectMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_itchy);
+        setContentView(R.layout.activity_main);
 
         HomePageFragment mainPage = new HomePageFragment();
         mainPage.addProjectSelectedListener(new HomePageFragment.OnProjectSelected() {

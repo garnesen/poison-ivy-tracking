@@ -39,7 +39,7 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         // Initialize singletons that require context.
         ReportDatabase.init(getActivity());
