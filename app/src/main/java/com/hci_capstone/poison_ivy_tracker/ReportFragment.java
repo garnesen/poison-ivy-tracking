@@ -3,7 +3,6 @@ package com.hci_capstone.poison_ivy_tracker;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -63,19 +62,15 @@ public class ReportFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        try {
-            reportCallback = (OnReportSubmittedListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement OnReportSubmittedListener");
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_report, container, false);
+
+        // Check that the parent container implements the callback.
+        try {
+            reportCallback = (OnReportSubmittedListener) getParentFragment();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getParentFragment().toString() + " must implement OnReportSubmittedListener");
+        }
 
         yes_button = (ToggleButton) view.findViewById(R.id.report_yes_button);
         no_button = (ToggleButton) view.findViewById(R.id.report_no_button);

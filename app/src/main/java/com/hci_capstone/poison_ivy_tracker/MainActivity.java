@@ -6,10 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.hci_capstone.poison_ivy_tracker.database.Report;
 import com.hci_capstone.poison_ivy_tracker.database.ReportDatabase;
@@ -22,7 +23,7 @@ import java.util.List;
 import im.delight.android.location.SimpleLocation;
 
 // TODO: Create an error page if the user denies location services.
-public class MainActivity extends AppCompatActivity implements ReportFragment.OnReportSubmittedListener {
+public class MainActivity extends Fragment implements ReportFragment.OnReportSubmittedListener {
 
     private BottomNavigationView bottomNavigationView;
     private List<Fragment> fragments;
@@ -34,26 +35,20 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
         REPORT, IDENTIFY, LEADERBOARDS, ABOUT, SETTINGS
     }
 
-    static {
-        // Set dark theme to always be on.
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-    }
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_main, container, false);
 
         // Initialize singletons that require context.
-        ReportDatabase.init(this);
-        InstanceID.init(this);
+        ReportDatabase.init(getActivity());
+        InstanceID.init(getActivity());
 
         // New SimpleLocation object, easy access to latitude and longitude.
-        location = new SimpleLocation(this);
+        location = new SimpleLocation(getActivity());
 
         // Check for location permissions.
         if (!hasLocationPermissions()) {
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+            ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         }
         else {
             location.beginUpdates();
@@ -62,10 +57,10 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
         // If location is not turned on...
         if (!location.hasLocationEnabled()) {
             // ...ask the user to enable location access.
-            SimpleLocation.openSettings(this);
+            SimpleLocation.openSettings(getActivity().getApplicationContext());
         }
         
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav);
+        bottomNavigationView = (BottomNavigationView) rootView.findViewById(R.id.bottom_nav);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -95,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
 
         // Set the default fragment.
         switchToFragment(FragmentTag.REPORT);
+        return rootView;
     }
 
     /**
@@ -102,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
      * @param tag the tag of the desired fragment
      */
     private void switchToFragment(FragmentTag tag) {
-        getSupportFragmentManager()
+        getChildFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frame_fragmentholder, fragments.get(tag.ordinal()), tag.toString())
                 .commit();
@@ -132,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
      * @return true if we have access, false otherwise
      */
     private boolean hasLocationPermissions() {
-        return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        return ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
 
     @Override
@@ -153,13 +149,13 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
         ReportDatabase.getDatabase().insertReports(new ReportDatabase.OnInsertCompleted() {
             @Override
             public void onInsertCompleted() {
-                IvyReportUploadService.requestSync(getApplicationContext());
+                IvyReportUploadService.requestSync(getActivity());
             }
         }, report);
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         // Make the device update its location.
@@ -169,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements ReportFragment.On
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         // Stop location updates (saves battery).
         if (hasLocationPermissions()) {
             location.endUpdates();
