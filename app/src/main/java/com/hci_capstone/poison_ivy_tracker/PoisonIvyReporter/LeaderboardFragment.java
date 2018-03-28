@@ -1,4 +1,4 @@
-package com.hci_capstone.poison_ivy_tracker;
+package com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter;
 
 import android.support.v4.app.Fragment;
 
@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.hci_capstone.poison_ivy_tracker.R;
+
 /**
  * Created by douglasbotello on 2/23/18.
  */

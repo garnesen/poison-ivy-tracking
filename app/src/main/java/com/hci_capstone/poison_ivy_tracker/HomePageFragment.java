@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.MainFragment;
+
 public class HomePageFragment extends Fragment {
 
     private OnProjectSelected callback;
@@ -22,7 +24,7 @@ public class HomePageFragment extends Fragment {
             public void onClick(View view) {
                 if (callback != null) {
                     // Send a new instance of the project fragment.
-                    callback.onProjectSelected(new MainActivity());
+                    callback.onProjectSelected(new MainFragment());
                 }
             }
         });

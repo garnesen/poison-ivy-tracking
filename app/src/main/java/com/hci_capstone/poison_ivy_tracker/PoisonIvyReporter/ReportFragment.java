@@ -1,4 +1,4 @@
-package com.hci_capstone.poison_ivy_tracker;
+package com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -20,6 +20,8 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import com.hci_capstone.poison_ivy_tracker.R;
 
 import java.io.File;
 import java.io.IOException;

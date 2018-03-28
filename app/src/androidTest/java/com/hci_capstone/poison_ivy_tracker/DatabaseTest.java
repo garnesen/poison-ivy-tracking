@@ -5,9 +5,9 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.hci_capstone.poison_ivy_tracker.database.Report;
-import com.hci_capstone.poison_ivy_tracker.database.ReportDAO;
-import com.hci_capstone.poison_ivy_tracker.database.ReportDatabase;
+import com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.database.Report;
+import com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.database.ReportDAO;
+import com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.database.ReportDatabase;
 
 import org.junit.After;
 import org.junit.Before;

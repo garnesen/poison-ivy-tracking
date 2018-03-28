@@ -1,4 +1,4 @@
-package com.hci_capstone.poison_ivy_tracker.sync;
+package com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.sync;
 
 import android.content.Context;
 import android.util.Log;

@@ -1,4 +1,4 @@
-package com.hci_capstone.poison_ivy_tracker;
+package com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.hci_capstone.poison_ivy_tracker.R;
 
 import java.io.Console;
 

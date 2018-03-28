@@ -1,4 +1,4 @@
-package com.hci_capstone.poison_ivy_tracker;
+package com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -12,9 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hci_capstone.poison_ivy_tracker.database.Report;
-import com.hci_capstone.poison_ivy_tracker.database.ReportDatabase;
-import com.hci_capstone.poison_ivy_tracker.sync.IvyReportUploadService;
+import com.hci_capstone.poison_ivy_tracker.InstanceID;
+import com.hci_capstone.poison_ivy_tracker.R;
+import com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.database.Report;
+import com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.database.ReportDatabase;
+import com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.sync.IvyReportUploadService;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +25,7 @@ import java.util.List;
 import im.delight.android.location.SimpleLocation;
 
 // TODO: Create an error page if the user denies location services.
-public class MainActivity extends Fragment implements ReportFragment.OnReportSubmittedListener {
+public class MainFragment extends Fragment implements ReportFragment.OnReportSubmittedListener {
 
     private BottomNavigationView bottomNavigationView;
     private List<Fragment> fragments;

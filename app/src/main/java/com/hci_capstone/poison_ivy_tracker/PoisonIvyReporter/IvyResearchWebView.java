@@ -1,4 +1,4 @@
-package com.hci_capstone.poison_ivy_tracker;
+package com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+
+import com.hci_capstone.poison_ivy_tracker.R;
 
 /**
  * Created by Douglas on 3/12/2018.

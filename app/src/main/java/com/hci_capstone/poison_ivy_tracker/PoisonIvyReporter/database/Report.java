@@ -1,4 +1,4 @@
-package com.hci_capstone.poison_ivy_tracker.database;
+package com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.database;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

@@ -1,4 +1,4 @@
-package com.hci_capstone.poison_ivy_tracker.sync;
+package com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.sync;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,8 +12,8 @@ import com.firebase.jobdispatcher.JobService;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.RetryStrategy;
 import com.firebase.jobdispatcher.Trigger;
-import com.hci_capstone.poison_ivy_tracker.database.Report;
-import com.hci_capstone.poison_ivy_tracker.database.ReportDatabase;
+import com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.database.Report;
+import com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.database.ReportDatabase;
 
 import java.util.List;
 
