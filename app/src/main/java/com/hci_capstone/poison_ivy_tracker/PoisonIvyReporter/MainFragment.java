@@ -43,7 +43,6 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
 
         // Initialize singletons that require context.
         ReportDatabase.init(getActivity());
-        InstanceID.init(getActivity());
 
         // New SimpleLocation object, easy access to latitude and longitude.
         location = new SimpleLocation(getActivity());

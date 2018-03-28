@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize singletons that require context.
+        InstanceID.init(this);
+
         HomePageFragment mainPage = new HomePageFragment();
         mainPage.addProjectSelectedListener(new HomePageFragment.OnProjectSelected() {
             @Override
