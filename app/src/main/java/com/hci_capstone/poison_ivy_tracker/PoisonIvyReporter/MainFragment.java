@@ -34,7 +34,7 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
     final int REQUEST_LOCATION = 200;
 
     enum FragmentTag {
-        REPORT, IDENTIFY, LEADERBOARDS, ABOUT, SETTINGS
+        REPORT, IDENTIFY, LEADERBOARDS, ABOUT
     }
 
     @Override
@@ -79,9 +79,6 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
                     case R.id.bottombaritem_about:
                         switchToFragment(FragmentTag.ABOUT);
                         return true;
-                    case R.id.bottombaritem_settings:
-                        switchToFragment(FragmentTag.SETTINGS);
-                        return true;
                 }
                 return false;
             }
@@ -115,13 +112,11 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
         Fragment identifyFragment = new IdentifyFragment();
         Fragment leaderboardsFragment = new LeaderboardFragment();
         Fragment aboutFragment = new AboutFragment();
-        Fragment settingsFragment = new SettingsFragment();
 
         fragments.add(reportFragment);
         fragments.add(identifyFragment);
         fragments.add(leaderboardsFragment);
         fragments.add(aboutFragment);
-        fragments.add(settingsFragment);
     }
 
     /**

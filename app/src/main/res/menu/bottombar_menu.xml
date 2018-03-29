@@ -26,10 +26,4 @@
         android:title="About"
         app:showAsAction="ifRoom"/>
 
-    <item
-        android:id="@+id/bottombaritem_settings"
-        android:icon="@drawable/ic_settings_black_24dp"
-        android:title="Settings"
-        app:showAsAction="ifRoom"/>
-
 </menu>

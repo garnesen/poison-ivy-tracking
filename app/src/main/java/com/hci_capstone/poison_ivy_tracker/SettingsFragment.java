@@ -1,11 +1,8 @@
-package com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter;
+package com.hci_capstone.poison_ivy_tracker;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceFragmentCompat;
-import android.util.Log;
-
-import com.hci_capstone.poison_ivy_tracker.R;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
