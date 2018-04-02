@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.MainFragment;
+import com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter.MainFragment;
 
 public class HomePageFragment extends Fragment {
 

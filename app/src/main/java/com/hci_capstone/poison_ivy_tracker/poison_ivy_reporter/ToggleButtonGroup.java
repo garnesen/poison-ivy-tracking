@@ -1,4 +1,4 @@
-package com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter;
+package com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter;
 
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;

@@ -1,4 +1,4 @@
-package com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.sync;
+package com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter.sync;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -17,8 +17,8 @@ import com.firebase.jobdispatcher.JobService;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.RetryStrategy;
 import com.firebase.jobdispatcher.Trigger;
-import com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.database.Report;
-import com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.database.ReportDatabase;
+import com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter.database.Report;
+import com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter.database.ReportDatabase;
 import com.hci_capstone.poison_ivy_tracker.R;
 import com.hci_capstone.poison_ivy_tracker.RequestHandler;
 

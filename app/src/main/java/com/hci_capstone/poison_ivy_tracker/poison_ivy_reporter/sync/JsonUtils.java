@@ -1,8 +1,8 @@
-package com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.sync;
+package com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter.sync;
 
 import android.util.Log;
 
-import com.hci_capstone.poison_ivy_tracker.PoisonIvyReporter.database.Report;
+import com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter.database.Report;
 
 import org.json.JSONArray;
 import org.json.JSONException;
