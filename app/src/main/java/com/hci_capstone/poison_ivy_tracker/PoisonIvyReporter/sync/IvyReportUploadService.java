@@ -47,7 +47,7 @@ public class IvyReportUploadService extends JobService {
 
         ReportDatabase.getDatabase().getAll(new ReportDatabase.OnGetAllCompleted() {
             @Override
-            public void onGetAllCompleted(List<Report> reports) {
+            public void onGetAllCompleted(final List<Report> reports) {
                 if (reports.size() == 0) {
                     Log.v(LOG_TAG, "Exiting Job: There are no reports.");
                     jobFinished(params, false);
@@ -69,10 +69,25 @@ public class IvyReportUploadService extends JobService {
                         json,
                         new Response.Listener<JSONObject>() {
                             @Override
-                            public void onResponse(JSONObject response) {
-                                // TODO: Delete the synced records.
-                                Log.v(LOG_TAG, "Exiting Job: Successfully synced records. Response: " + response.toString());
-                                jobFinished(params, false);
+                            public void onResponse(final JSONObject response) {
+                                Log.v(LOG_TAG, "Successfully synced records. Response: " + response.toString());
+
+                                // Delete images stored on device.
+
+
+                                // Convert list to array.
+                                Report[] reportsAsArray = new Report[reports.size()];
+                                reportsAsArray = reports.toArray(reportsAsArray);
+
+                                // Delete the synced records.
+                                ReportDatabase.getDatabase().deleteReports(new ReportDatabase.OnDeleteCompleted() {
+                                    @Override
+                                    public void onDeleteCompleted() {
+                                        Log.v(LOG_TAG, "Exiting Job: Removed the synced records from local database.");
+                                        jobFinished(params, false);
+                                    }
+                                }, reportsAsArray);
+
                             }
                         },
                         new Response.ErrorListener() {

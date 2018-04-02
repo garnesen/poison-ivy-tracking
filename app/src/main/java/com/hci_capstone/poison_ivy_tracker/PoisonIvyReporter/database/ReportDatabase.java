@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 
 import com.hci_capstone.poison_ivy_tracker.exceptions.UninitializedSingletonException;
 
+import java.io.File;
 import java.util.List;
 
 // TODO: May need to make query methods synchronized.
@@ -51,6 +52,7 @@ public abstract class ReportDatabase extends RoomDatabase {
 
     /**
      * Insert reports into the database.
+     * @param callback
      * @param reports
      */
     public void insertReports(OnInsertCompleted callback, Report... reports) {
@@ -63,6 +65,14 @@ public abstract class ReportDatabase extends RoomDatabase {
      */
     public void getAll(OnGetAllCompleted callback) {
         new GetReportsInBackground(callback).execute();
+    }
+
+    /**
+     * Delete given reports in database.
+     * @param callback
+     */
+    public void deleteReports(OnDeleteCompleted callback, Report... reports) {
+        new DeleteReportsInBackground(callback).execute(reports);
     }
 
     /**
@@ -115,6 +125,44 @@ public abstract class ReportDatabase extends RoomDatabase {
     }
 
     /**
+     * An async task to delete reports in the background.
+     */
+    private static class DeleteReportsInBackground extends AsyncTask<Report, Void, Boolean> {
+
+        private OnDeleteCompleted callback;
+
+        public DeleteReportsInBackground(OnDeleteCompleted callback) {
+            this.callback = callback;
+        }
+
+        @Override
+        protected Boolean doInBackground(Report... reports) {
+            // Delete images stored on device.
+            for (Report report : reports) {
+                if (report.getImageLocations() == null) {
+                    continue;
+                }
+                for (String imageLocation : report.getImageLocations()) {
+                    File image = new File(imageLocation);
+                    image.delete();
+                }
+            }
+
+            // Delete records in database.
+            INSTANCE.reportDAO().deleteReports(reports);
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean finished) {
+            if (callback != null) {
+                callback.onDeleteCompleted();
+            }
+        }
+    }
+
+
+    /**
      * Callback interface for getAll.
      */
     public interface OnGetAllCompleted {
@@ -126,5 +174,12 @@ public abstract class ReportDatabase extends RoomDatabase {
      */
     public interface OnInsertCompleted{
         void onInsertCompleted();
+    }
+
+    /**
+     * Callback interface for delete.
+     */
+    public interface OnDeleteCompleted{
+        void onDeleteCompleted();
     }
 }

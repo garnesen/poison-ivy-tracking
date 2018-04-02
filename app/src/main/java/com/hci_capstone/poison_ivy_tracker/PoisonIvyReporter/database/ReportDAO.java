@@ -14,7 +14,7 @@ public interface ReportDAO {
     void insertReports(Report... report);
 
     @Delete
-    void deleteReport(Report report);
+    void deleteReports(Report... report);
 
     @Query("DELETE FROM report")
     void clearTable();
