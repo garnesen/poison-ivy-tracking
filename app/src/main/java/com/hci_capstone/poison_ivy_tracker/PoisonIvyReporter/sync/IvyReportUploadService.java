@@ -71,10 +71,7 @@ public class IvyReportUploadService extends JobService {
                             @Override
                             public void onResponse(final JSONObject response) {
                                 Log.v(LOG_TAG, "Successfully synced records. Response: " + response.toString());
-
-                                // Delete images stored on device.
-
-
+                                
                                 // Convert list to array.
                                 Report[] reportsAsArray = new Report[reports.size()];
                                 reportsAsArray = reports.toArray(reportsAsArray);
