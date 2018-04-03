@@ -42,16 +42,16 @@ import static android.app.Activity.RESULT_OK;
  */
 public class ReportFragment extends Fragment {
 
-    ToggleButton yes_button, no_button, creeping_button, climbing_button, shrub_button, camera_button;
-    Button submit_button;
-    ToggleButtonGroup question1Group, question2Group;
+    private ToggleButton yes_button, no_button, creeping_button, climbing_button, shrub_button, camera_button;
+    private Button submit_button;
+    private ToggleButtonGroup question1Group, question2Group;
 
-    AnimatorSet question2Fade, question3Fade;
-    Interpolator forwardInterpolator, reverseInterpolator;
+    private AnimatorSet question2Fade, question3Fade;
+    private Interpolator forwardInterpolator, reverseInterpolator;
 
-    File currentImageFile;
+    private File currentImageFile;
 
-    OnReportSubmittedListener reportCallback;
+    private OnReportSubmittedListener reportCallback;
 
     final String AUTHORITY = "com.hci_capstone.poison_ivy_tracker.fileprovider";
 
