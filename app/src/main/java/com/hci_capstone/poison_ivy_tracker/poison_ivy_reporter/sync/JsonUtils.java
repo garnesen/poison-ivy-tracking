@@ -1,5 +1,8 @@
 package com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter.sync;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 
 import com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter.database.Report;
@@ -8,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 public class JsonUtils {
@@ -66,7 +70,18 @@ public class JsonUtils {
      * @return the string encoded image
      */
     public static String imageToString(String imageLocation) {
-        // TODO: Implement imageToString
-        return imageLocation;
+        if (imageLocation == null) {
+            return null;
+        }
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        Bitmap bitmap = BitmapFactory.decodeFile(imageLocation);
+        if (bitmap == null) {
+            Log.v(LOG_TAG, "Failed to turn image into bitmap (image may have been deleted): " + imageLocation);
+            return null;
+        }
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+        String imageAsString = Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
+
+        return imageAsString;
     }
 }
