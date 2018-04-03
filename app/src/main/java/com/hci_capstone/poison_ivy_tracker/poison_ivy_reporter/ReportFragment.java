@@ -20,10 +20,15 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.graphics.BitmapFactory;
+import android.graphics.Bitmap;
 
 import com.hci_capstone.poison_ivy_tracker.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -367,4 +372,54 @@ public class ReportFragment extends Fragment {
             currentImageFile = null;
         }
     }
+
+    /**
+     * Resizes an image given an absolute path to the image and the desired width and height of the new image.
+     * Will overwrite the original image at the gievn path
+     * @param imagePath
+     *      The absolute path of the image. Should be a .jpg file
+     * @param newWidth
+     *      The width of the image after resize
+     * @param newHeight
+     *      The height of the image after resize
+     */
+    private void resizeImage(String imagePath, int newWidth, int newHeight) {
+
+
+        //convert filename to bitmap
+        Bitmap bf = BitmapFactory.decodeFile(imagePath);
+        //use bitmap to scale image
+        Bitmap smallerBitmap = bf.createScaledBitmap(bf, newWidth, newHeight, false);
+        //Overwrite file
+        File f = new File(imagePath);
+        try {
+            f.createNewFile();
+        } catch (IOException e) {
+            Log.v("IVY_IMAGE_CAPTURE", "Failed to resize image.");
+            return;
+        }
+
+        //create a new output stream
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        smallerBitmap.compress(Bitmap.CompressFormat.JPEG, 50 , bos);
+        byte[] bitmapdata = bos.toByteArray();
+
+        //write the bytes in file
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(f);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }
