@@ -29,6 +29,7 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
 
     private BottomNavigationView bottomNavigationView;
     private List<Fragment> fragments;
+    private boolean fragmentIsAlive;
 
     private SimpleLocation location;
     final int REQUEST_LOCATION = 200;
@@ -84,10 +85,17 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
             }
         });
 
+        // If the fragment is still alive, do not recreate the child fragments.
+        if (fragmentIsAlive) {
+            return rootView;
+        }
+        fragmentIsAlive = true;
+
         buildFragmentsList();
 
         // Set the default fragment.
         switchToFragment(FragmentTag.REPORT);
+
         return rootView;
     }
 
@@ -177,5 +185,11 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
                 location.beginUpdates();
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        fragmentIsAlive = false;
     }
 }
