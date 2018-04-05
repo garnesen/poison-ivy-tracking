@@ -25,9 +25,8 @@ import android.graphics.Bitmap;
 
 import com.hci_capstone.poison_ivy_tracker.R;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -42,7 +41,6 @@ import static android.app.Activity.RESULT_OK;
  * Fragment of the bottom navigation bar that allows the user to submit a report.
  *
  * TODO: If the user takes a picture and closes the app without being submitted, that image is still saved.
- * TODO: Scale captured image sizes down.
  * TODO: Allow multiple pictures to be taken?
  */
 public class ReportFragment extends Fragment {
@@ -332,6 +330,7 @@ public class ReportFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Log.v("IVY_IMAGE_CAPTURE", "Successfully took picture.");
+            reduceImageSize(currentImageFile);
         }
         else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_CANCELED){
             Log.v("IVY_IMAGE_CAPTURE", "Picture was cancelled.");
@@ -374,52 +373,49 @@ public class ReportFragment extends Fragment {
     }
 
     /**
-     * Resizes an image given an absolute path to the image and the desired width and height of the new image.
-     * Will overwrite the original image at the gievn path
-     * @param imagePath
-     *      The absolute path of the image. Should be a .jpg file
-     * @param newWidth
-     *      The width of the image after resize
-     * @param newHeight
-     *      The height of the image after resize
+     * TODO: Create a smarter image size reduction?
+     * Overwrites an image file with a size reduced version of it.
+     * @param file
+     * @return the file
      */
-    private void resizeImage(String imagePath, int newWidth, int newHeight) {
-
-
-        //convert filename to bitmap
-        Bitmap bf = BitmapFactory.decodeFile(imagePath);
-        //use bitmap to scale image
-        Bitmap smallerBitmap = bf.createScaledBitmap(bf, newWidth, newHeight, false);
-        //Overwrite file
-        File f = new File(imagePath);
+    public File reduceImageSize(File file) {
         try {
-            f.createNewFile();
-        } catch (IOException e) {
-            Log.v("IVY_IMAGE_CAPTURE", "Failed to resize image.");
-            return;
-        }
+            Log.v("IVY_IMAGE_CAPTURE", "Attempting to reduce image size, starting size: " + file.length());
 
-        //create a new output stream
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        smallerBitmap.compress(Bitmap.CompressFormat.JPEG, 50 , bos);
-        byte[] bitmapdata = bos.toByteArray();
+            // BitmapFactory options to downsize the image
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            options.inSampleSize = 8;
 
-        //write the bytes in file
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(f);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            fos.write(bitmapdata);
-            fos.flush();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            FileInputStream inputStream = new FileInputStream(file);
+            BitmapFactory.decodeStream(inputStream, null, options);
+            inputStream.close();
 
+            // The new size we want to scale to
+            final int REQUIRED_SIZE = 75;
+
+            // Find the correct scale value. It should be the power of 2.
+            int scale = 1;
+            while(options.outWidth / scale / 2 >= REQUIRED_SIZE && options.outHeight / scale / 2 >= REQUIRED_SIZE) {
+                scale *= 2;
+            }
+
+            options = new BitmapFactory.Options();
+            options.inSampleSize = scale;
+            inputStream = new FileInputStream(file);
+            Bitmap selectedBitmap = BitmapFactory.decodeStream(inputStream, null, options);
+            inputStream.close();
+
+            file.createNewFile();
+            FileOutputStream outputStream = new FileOutputStream(file);
+            selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 100 , outputStream);
+
+            Log.v("IVY_IMAGE_CAPTURE", "Finished image size reduction, new size: " + file.length());
+            return file;
+        } catch (Exception e) {
+            Log.v("IVY_IMAGE_CAPTURE", "Failed to reduce image size.");
+            return null;
+        }
     }
-
 
 }
