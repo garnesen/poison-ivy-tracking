@@ -43,7 +43,8 @@ public class SettingsSyncService extends JobService {
         try {
             setting_change.put(key, data);
             json.put("uid", uid);
-            json.put("setting_change", setting_change);
+            json.put("payloadType", "SETTINGS");
+            json.put("payload", setting_change);
         } catch (JSONException e) {
             Log.v(LOG_TAG, "Exiting Job: Failed to create JSON for request.");
             return false;

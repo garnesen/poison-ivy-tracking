@@ -33,7 +33,8 @@ public class JsonUtils {
                 reportsJson.put(reportToJson(report));
             }
             json.put("uid", uid);
-            json.put("reports", reportsJson);
+            json.put("payloadType", "REPORTS");
+            json.put("payload", reportsJson);
         } catch(JSONException e) {
             Log.v(LOG_TAG,"Failed to create JSON object");
             e.printStackTrace();
