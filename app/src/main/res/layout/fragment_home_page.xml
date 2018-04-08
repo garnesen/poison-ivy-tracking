@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textSize="24sp"
-        android:text="ITCHY Project" />
+        android:text="Select a project..." />
 
     <View
         android:id="@+id/divider1"
