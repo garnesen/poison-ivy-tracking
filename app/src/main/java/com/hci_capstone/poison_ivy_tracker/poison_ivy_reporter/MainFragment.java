@@ -1,17 +1,17 @@
 package com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hci_capstone.poison_ivy_tracker.GetLocationListener;
 import com.hci_capstone.poison_ivy_tracker.InstanceID;
 import com.hci_capstone.poison_ivy_tracker.R;
 import com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter.database.Report;
@@ -24,18 +24,29 @@ import java.util.List;
 
 import im.delight.android.location.SimpleLocation;
 
-// TODO: Create an error page if the user denies location services.
 public class MainFragment extends Fragment implements ReportFragment.OnReportSubmittedListener {
 
     private BottomNavigationView bottomNavigationView;
     private List<Fragment> fragments;
     private boolean fragmentIsAlive;
 
+    private GetLocationListener locationCallback;
     private SimpleLocation location;
-    final int REQUEST_LOCATION = 200;
 
     enum FragmentTag {
         REPORT, IDENTIFY, LEADERBOARDS, ABOUT
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            locationCallback = (GetLocationListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement GetLocationListener.");
+        }
+
     }
 
     @Override
@@ -45,23 +56,8 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
         // Initialize singletons that require context.
         ReportDatabase.init(getActivity());
 
-        // New SimpleLocation object, easy access to latitude and longitude.
-        location = new SimpleLocation(getActivity());
+        location = locationCallback.getLocation();
 
-        // Check for location permissions.
-        if (!hasLocationPermissions()) {
-            ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-        }
-        else {
-            location.beginUpdates();
-        }
-
-        // If location is not turned on...
-        if (!location.hasLocationEnabled()) {
-            // ...ask the user to enable location access.
-            SimpleLocation.openSettings(getActivity().getApplicationContext());
-        }
-        
         bottomNavigationView = (BottomNavigationView) rootView.findViewById(R.id.bottom_nav);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -127,19 +123,17 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
         fragments.add(aboutFragment);
     }
 
-    /**
-     * Check if we have access to user location.
-     * @return true if we have access, false otherwise
-     */
-    private boolean hasLocationPermissions() {
-        return ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-    }
+
 
     @Override
     public void onReportSubmitted(boolean ivyPresent, String ivyType, List<String> imageLocations) {
         Date curDate = new Date();
         ivyType = ivyPresent ? ivyType : "absent";
         String uid = InstanceID.getInstance().getId();
+        if (location == null) {
+            Log.v("IVY_MAIN_FRAGMENT", "Location object null. Skipping report.");
+            return;
+        }
 
         Report report = new Report(
                 uid,
@@ -156,35 +150,6 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
                 IvyReportUploadService.requestSync(getActivity());
             }
         }, report);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        // Make the device update its location.
-        if (hasLocationPermissions()) {
-            location.beginUpdates();
-        }
-    }
-
-    @Override
-    public void onPause() {
-        // Stop location updates (saves battery).
-        if (hasLocationPermissions()) {
-            location.endUpdates();
-        }
-
-        super.onPause();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == REQUEST_LOCATION) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                location.beginUpdates();
-            }
-        }
     }
 
     @Override

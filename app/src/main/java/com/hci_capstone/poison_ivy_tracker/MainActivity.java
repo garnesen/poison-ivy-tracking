@@ -1,6 +1,9 @@
 package com.hci_capstone.poison_ivy_tracker;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,12 +12,17 @@ import android.support.v7.app.AppCompatDelegate;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import im.delight.android.location.SimpleLocation;
+
+public class MainActivity extends AppCompatActivity implements GetLocationListener {
 
     static {
         // Set dark theme to always be on.
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
     }
+
+    private final int REQUEST_LOCATION = 200;
+    private SimpleLocation location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +31,23 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize singletons that require context.
         InstanceID.init(this);
+
+        // New SimpleLocation object, easy access to latitude and longitude.
+        location = new SimpleLocation(getApplicationContext());
+
+        // Check for location permissions.
+        if (!hasLocationPermissions()) {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        }
+        else {
+            location.beginUpdates();
+        }
+
+        // If location is not turned on...
+        if (!location.hasLocationEnabled()) {
+            // ...ask the user to enable location access.
+            SimpleLocation.openSettings(getApplicationContext());
+        }
 
         HomePageFragment mainPage = new HomePageFragment();
         mainPage.addProjectSelectedListener(new HomePageFragment.OnProjectSelected() {
@@ -34,6 +59,23 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the initial page.
         switchToFragment(mainPage, false);
+    }
+
+    @Override
+    public SimpleLocation getLocation() {
+        if (hasLocationPermissions()) {
+            return location;
+        }
+
+        // If there is a current project loaded, lets remove it from the backstack and replace with the error.
+        if (getSupportFragmentManager().getBackStackEntryCount() >= 1) {
+            getSupportFragmentManager().popBackStack();
+        }
+
+        // Show the location error.
+        switchToFragment(new LocationErrorFragment(), true);
+
+        return null;
     }
 
     @Override
@@ -82,5 +124,42 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    /**
+     * Check if we have access to user location.
+     * @return true if we have access, false otherwise
+     */
+    private boolean hasLocationPermissions() {
+        return ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Make the device update its location.
+        if (hasLocationPermissions()) {
+            location.beginUpdates();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        // Stop location updates (saves battery).
+        if (hasLocationPermissions()) {
+            location.endUpdates();
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == REQUEST_LOCATION) {
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                location.beginUpdates();
+            }
+        }
     }
 }
