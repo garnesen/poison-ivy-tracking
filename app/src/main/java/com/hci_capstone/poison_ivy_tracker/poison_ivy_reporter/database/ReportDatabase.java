@@ -143,8 +143,10 @@ public abstract class ReportDatabase extends RoomDatabase {
                     continue;
                 }
                 for (String imageLocation : report.getImageLocations()) {
-                    File image = new File(imageLocation);
-                    image.delete();
+                    if (imageLocation != null) {
+                        File image = new File(imageLocation);
+                        image.delete();
+                    }
                 }
             }
 
