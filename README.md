@@ -26,10 +26,10 @@ Add the following code to [HomePageFragment.java](../master/app/src/main/java/co
 Button myProjectButton = view.findViewById(R.id.my_project_button);  
 myProjectButton.setOnClickListener(new View.OnClickListener() {  
   @Override  
-  public void onClick(View view) {  
-        if (callback != null) {  
-		      callback.onProjectSelected(new MyProjectFragment());  
-        }  
+    public void onClick(View view) {  
+      if (callback != null) {  
+	    callback.onProjectSelected(new MyProjectFragment());  
+      }  
     }  
 });
 ```
