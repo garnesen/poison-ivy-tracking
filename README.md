@@ -10,7 +10,7 @@ The ITCHY Project is new, more citizen science projects are on the way.
 # Adding a Project to the App
 
 ### Add a Project Button
-Add the following XML code to [fragment_home_page.xml](..blob/master/app/src/main/res/layout/fragment_home_page.xml) to create a button on the home page.
+Add the following XML code to [fragment_home_page.xml](../master/app/src/main/res/layout/fragment_home_page.xml) to create a button on the home page.
 ```xml
 <Button  
   android:layout_width="match_parent"  
@@ -21,7 +21,7 @@ Add the following XML code to [fragment_home_page.xml](..blob/master/app/src/mai
 ```
 
 ### Link to Main Activity
-Add the following code to [HomePageFragment.java](../blob/master/app/src/main/java/com/hci_capstone/poison_ivy_tracker/HomePageFragment.java) to send a new instance of your project fragment to the main activity.
+Add the following code to [HomePageFragment.java](../master/app/src/main/java/com/hci_capstone/poison_ivy_tracker/HomePageFragment.java) to send a new instance of your project fragment to the main activity.
 ```java
 Button myProjectButton = view.findViewById(R.id.my_project_button);  
 myProjectButton.setOnClickListener(new View.OnClickListener() {  
