@@ -74,7 +74,7 @@ First add your setting to [fragment_settings.xml](../master/app/src/main/res/xml
   android:title="Setting Name"
   android:summary="This is my setting!" />
   ```
-If you want the server to be alerted of the setting change, add a ``$`` in front of the key name, so it would be ``android:key="$pref_my_setting"``. When the setting change occurs, a request will be made with the following body:
+If you want the server to be alerted of the setting change, add your key the ``SYNC_KEYS`` list in [SettingsFragment.java](../master/app/src/main/java/com/hci_capstone/poison_ivy_tracker/SettingsFragment.java). When the setting change occurs, a request will be made with the following body:
 ```json
 {
 	uid: "a1a75dfe-b444-3512-d456-e7845h67895g6",
