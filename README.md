@@ -42,6 +42,9 @@ Create a new package for all your project files and create ``MyProjectFragment.j
 ### Instance ID
 When the app is first run, an instance ID is created for the user. This ID can be accessed by calling ``InstanceID.getInstance().getId()``.
 
+### Request Handler
+You can queue a request by calling ``RequestHandler.getInstance().addToRequestQueue(...);``. An example can be seen in [SettingsSyncService.java](../master/app/src/main/java/com/hci_capstone/poison_ivy_tracker/SettingsSyncService.java).
+
 ### Location
 The main activity of the app handles location services. To get access to this object, first add to your fragment the following code:
 ```java
