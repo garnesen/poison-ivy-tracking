@@ -1,6 +1,5 @@
 package com.hci_capstone.poison_ivy_tracker;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceFragmentCompat;
@@ -17,6 +16,7 @@ import com.firebase.jobdispatcher.Trigger;
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private final String LOG_TAG = "ITCHY_SETTINGS";
+    private final String[] SYNC_KEYS = new String[] {"pref_screen_name", "pref_email"};
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -26,6 +26,10 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (!needsSync(key)) {
+            return;
+        }
+
         // Store data in intent.
         Bundle data = new Bundle();
         data.putString("pref_key", key);
@@ -55,6 +59,20 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 
         Log.v(LOG_TAG, "Attempting to schedule settings sync job.");
         dispatcher.mustSchedule(uploadJob);
+    }
+
+    /**
+     * Check if the key is in the list of SYNC_KEYS.
+     * @param testKey the key
+     * @return true if in list
+     */
+    private boolean needsSync(String testKey) {
+        for (String key : SYNC_KEYS) {
+            if (key.equals(testKey)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
