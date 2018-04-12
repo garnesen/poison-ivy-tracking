@@ -1,3 +1,4 @@
+
 # ITCHY Project
 The ITCHY Project app is a collection of citizen science projects that anyone can partake in. More information can be found in [this video](https://www.youtube.com/watch?v=v-eHn1Zhlx4).
 
@@ -36,3 +37,48 @@ myProjectButton.setOnClickListener(new View.OnClickListener() {
 
 ### Create Your Project
 Create a new package for all your project files and create ``MyProjectFragment.java``  that extends ``android.support.v4.app.Fragment`` . This will act as the "main activity" for your project page.
+
+## Available Tools
+### Instance ID
+When the app is first run, an instance ID is created for the user. This ID can be accessed by calling ``InstanceID.getInstance().getId()``.
+
+### Location
+The main activity of the app handles location services. To get access to this object, first add to your fragment the following code:
+```java
+private GetLocationListener locationCallback;
+
+@Override
+public void onAttach(Context context) {
+    super.onAttach(context);
+
+    try {
+        locationCallback = (GetLocationListener) context;
+    } catch (ClassCastException e) {
+        throw new ClassCastException(context.toString() + " must implement GetLocationListener.");
+    }
+
+}
+```
+You can then get the location object like so:
+```java
+SimpleLocation location = locationCallback.getLocation();
+double longitude = location.getLongitude();
+double latitude = location.getLatitude();
+double altitude = location.getAltitude();
+```
+## Adding Settings
+First add your setting to [fragment_settings.xml](../master/app/src/main/res/xml/fragment_settings.xml). The following code is an example of what it may look like.
+```xml
+<EditTextPreference
+  android:key="pref_my_setting"
+  android:title="Setting Name"
+  android:summary="This is my setting!" />
+  ```
+If you want the server to be alerted of the setting change, add a ``$`` in front of the key name, so it would be ``android:key="$pref_my_setting"``. When the setting change occurs, a request will be made with the following body:
+```json
+{
+	uid: "a1a75dfe-b444-3512-d456-e7845h67895g6",
+	payloadType: "SETTINGS",
+	payload: {pref_my_setting: "the new value"}
+}
+```
