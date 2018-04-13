@@ -47,7 +47,7 @@ import static android.app.Activity.RESULT_OK;
 public class ReportFragment extends Fragment {
 
     private ToggleButton yes_button, no_button, creeping_button, climbing_button, shrub_button;
-    private Button camera_button, delete_button, submit_button, edit_button;
+    private Button camera_button, submit_button, edit_button;
     private ToggleButtonGroup question1Group, question2Group;
 
     private AnimatorSet question2Fade, question3Fade, imageEditFade;
@@ -84,7 +84,6 @@ public class ReportFragment extends Fragment {
         climbing_button = (ToggleButton) view.findViewById(R.id.report_climbing_button);
         shrub_button = (ToggleButton) view.findViewById(R.id.report_shrub_button);
         camera_button = (Button) view.findViewById(R.id.report_camera_button);
-        delete_button = (Button) view.findViewById(R.id.report_delete_button);
         edit_button = (Button) view.findViewById(R.id.report_edit_button);
         submit_button = (Button) view.findViewById(R.id.report_submit_button);
 
@@ -115,7 +114,7 @@ public class ReportFragment extends Fragment {
                     if (camera_button.isEnabled()) {
                         performFadeOutFor(question3Fade);
                     }
-                    if (delete_button.isEnabled()) {
+                    if (edit_button.isEnabled()) {
                         performFadeOutFor(imageEditFade);
                         deleteAllImages();
                     }
@@ -124,7 +123,6 @@ public class ReportFragment extends Fragment {
                     question2Group.clearCheck();
 
                     camera_button.setEnabled(false);
-                    delete_button.setEnabled(false);
                     edit_button.setEnabled(false);
 
                     submit_button.setEnabled(true);
@@ -145,7 +143,6 @@ public class ReportFragment extends Fragment {
                     // Check if we need to enable the edit buttons.
                     if (currentImageFiles.size() > 0) {
                         edit_button.setEnabled(true);
-                        delete_button.setEnabled(true);
                         performFadeInFor(imageEditFade);
                     }
                 }
@@ -159,11 +156,10 @@ public class ReportFragment extends Fragment {
             }
         });
 
-        delete_button.setOnClickListener(new View.OnClickListener() {
+        edit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 deleteAllImages();
-                delete_button.setEnabled(false);
                 edit_button.setEnabled(false);
                 performFadeOutFor(imageEditFade);
                 Toast.makeText(getContext(), "Deleted images.", Toast.LENGTH_SHORT).show();
@@ -215,8 +211,7 @@ public class ReportFragment extends Fragment {
             camera_button.setEnabled(false);
             performFadeOutFor(question3Fade);
         }
-        if (delete_button.isEnabled()) {
-            delete_button.setEnabled(false);
+        if (edit_button.isEnabled()) {
             edit_button.setEnabled(false);
             performFadeOutFor(imageEditFade);
         }
@@ -287,12 +282,9 @@ public class ReportFragment extends Fragment {
         );
 
         // Create the fade animation for the edit buttons.
-        TextView delete_text = (TextView) view.findViewById(R.id.report_delete_text);
         TextView edit_text = (TextView) view.findViewById(R.id.report_edit_text);
 
         imageEditFade.playTogether(
-                createSingleFadeAnimation(delete_button, animationDuration),
-                createSingleFadeAnimation(delete_text, animationDuration),
                 createSingleFadeAnimation(edit_button, animationDuration),
                 createSingleFadeAnimation(edit_text, animationDuration)
         );
@@ -365,7 +357,6 @@ public class ReportFragment extends Fragment {
             Log.v("IVY_IMAGE_CAPTURE", "Successfully took picture.");
 
             // Enable picture editing.
-            delete_button.setEnabled(true);
             edit_button.setEnabled(true);
             performFadeInFor(imageEditFade);
 

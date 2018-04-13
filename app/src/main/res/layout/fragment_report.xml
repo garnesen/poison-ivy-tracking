@@ -189,15 +189,15 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:alpha="@dimen/report_view_disabled_alpha"
-        android:enabled="false"
         android:background="@drawable/ic_camera"
+        android:enabled="false"
         android:tag="camera"
         android:text=""
         app:layout_constraintBottom_toTopOf="@+id/report_camera_text"
         app:layout_constraintDimensionRatio="h,1:1"
-        app:layout_constraintEnd_toStartOf="@+id/report_delete_button"
+        app:layout_constraintEnd_toStartOf="@+id/report_edit_button"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/report_edit_button"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="@dimen/toggle_button_percent_width" />
@@ -298,28 +298,12 @@
         android:id="@+id/report_edit_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:alpha="@dimen/report_view_disabled_alpha"
         android:layout_marginTop="8dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
         android:background="@drawable/ic_edit"
-        android:text=""
         android:enabled="false"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/report_camera_button"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider3"
-        app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="@dimen/toggle_button_percent_width" />
-
-    <Button
-        android:id="@+id/report_delete_button"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:alpha="@dimen/report_view_disabled_alpha"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/ic_trash"
         android:text=""
-        android:enabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/report_edit_text"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -337,15 +321,5 @@
         app:layout_constraintEnd_toEndOf="@+id/report_edit_button"
         app:layout_constraintStart_toStartOf="@+id/report_edit_button"
         app:layout_constraintTop_toBottomOf="@+id/report_edit_button" />
-
-    <TextView
-        android:id="@+id/report_delete_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="@dimen/report_view_disabled_alpha"
-        android:text="Delete All"
-        app:layout_constraintEnd_toEndOf="@+id/report_delete_button"
-        app:layout_constraintStart_toStartOf="@+id/report_delete_button"
-        app:layout_constraintTop_toBottomOf="@+id/report_delete_button" />
 
 </android.support.constraint.ConstraintLayout>
