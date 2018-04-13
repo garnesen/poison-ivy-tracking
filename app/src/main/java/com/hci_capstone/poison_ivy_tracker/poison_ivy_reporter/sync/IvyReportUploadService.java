@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.volley.NetworkError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -90,7 +91,7 @@ public class IvyReportUploadService extends JobService {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Log.v(LOG_TAG, "Rescheduling Job: Error response from request: " + error);
+                                Log.v(LOG_TAG, "Rescheduling Job: Error response.\n" + getErrorAsString(error));
                                 jobFinished(params, false);
                             }
                         }
@@ -107,6 +108,22 @@ public class IvyReportUploadService extends JobService {
     @Override
     public boolean onStopJob(JobParameters params) {
         return false; // Return true if this job should be retried.
+    }
+
+    /**
+     * Turns a VolleyError into a printable string.
+     * @param error the error
+     * @return the string
+     */
+    private String getErrorAsString(VolleyError error) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\tError: ").append(error);
+        sb.append("\n\tNetworkResponse: ").append(error.networkResponse);
+        if (error.networkResponse != null) {
+            sb.append("\n\tStatusCode: ").append(error.networkResponse.statusCode);
+            sb.append("\n\tHeaders: ").append(error.networkResponse.allHeaders.toString());
+        }
+        return sb.toString();
     }
 
     /**
