@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/activity_horizontal_margin">
 
     <ToggleButton
         android:id="@+id/report_yes_button"
-        android:tag="yes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/toggle_selector_yes"
+        android:tag="yes"
         android:textOff=""
         android:textOn=""
         app:layout_constraintBottom_toTopOf="@+id/guideline1"
@@ -27,12 +28,12 @@
 
     <ToggleButton
         android:id="@+id/report_no_button"
-        android:tag="no"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/toggle_selector_no"
+        android:tag="no"
         android:textOff=""
         android:textOn=""
         app:layout_constraintBottom_toTopOf="@+id/guideline1"
@@ -72,10 +73,10 @@
         android:id="@+id/report_question_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="@dimen/report_view_disabled_alpha"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
         android:text="What type of poison ivy?"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,14 +85,14 @@
 
     <ToggleButton
         android:id="@+id/report_shrub_button"
-        android:tag="shrub"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:alpha="@dimen/report_view_disabled_alpha"
-        android:enabled="false"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
         android:background="@drawable/toggle_selector_shrub"
+        android:enabled="false"
+        android:tag="shrub"
         android:textOff=""
         android:textOn=""
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -106,14 +107,14 @@
 
     <ToggleButton
         android:id="@+id/report_climbing_button"
-        android:tag="climbing"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:alpha="@dimen/report_view_disabled_alpha"
-        android:enabled="false"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
         android:background="@drawable/toggle_selector_climbing"
+        android:enabled="false"
+        android:tag="climbing"
         android:textOff=""
         android:textOn=""
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -128,14 +129,14 @@
 
     <ToggleButton
         android:id="@+id/report_creeping_button"
-        android:tag="creeping"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:alpha="@dimen/report_view_disabled_alpha"
-        android:enabled="false"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
         android:background="@drawable/toggle_selector_creeping"
+        android:enabled="false"
+        android:tag="creeping"
         android:textOff=""
         android:textOn=""
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -154,11 +155,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/report_question_2"
-        android:alpha="@dimen/report_view_disabled_alpha" />
+        app:layout_constraintTop_toBottomOf="@+id/report_question_2" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline1"
@@ -171,33 +172,32 @@
         android:id="@+id/report_question_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:alpha="@dimen/report_view_disabled_alpha"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
         android:text="Take a picture? (Optional)"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
-    <ToggleButton
+    <Button
         android:id="@+id/report_camera_button"
-        android:tag="camera"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:alpha="@dimen/report_view_disabled_alpha"
         android:enabled="false"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/toggle_selector_camera"
-        android:textOff=""
-        android:textOn=""
+        android:background="@drawable/ic_camera"
+        android:tag="camera"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@+id/report_camera_text"
         app:layout_constraintDimensionRatio="h,1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/report_delete_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/report_edit_button"
         app:layout_constraintTop_toBottomOf="@+id/divider3"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="@dimen/toggle_button_percent_width" />
@@ -208,10 +208,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/report_question_3"
-        android:alpha="@dimen/report_view_disabled_alpha" />
+        app:layout_constraintTop_toBottomOf="@+id/report_question_3" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
@@ -275,6 +275,7 @@
         android:alpha="@dimen/report_view_disabled_alpha"
         android:text="Camera"
         app:layout_constraintEnd_toEndOf="@+id/report_camera_button"
+        app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="@+id/report_camera_button"
         app:layout_constraintTop_toBottomOf="@+id/report_camera_button" />
 
@@ -292,5 +293,59 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="@dimen/submit_button_percent_width" />
+
+    <Button
+        android:id="@+id/report_edit_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_edit"
+        android:text=""
+        android:enabled="false"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/report_camera_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="@dimen/toggle_button_percent_width" />
+
+    <Button
+        android:id="@+id/report_delete_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_trash"
+        android:text=""
+        android:enabled="false"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/report_camera_button"
+        app:layout_constraintTop_toBottomOf="@+id/divider3"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="@dimen/toggle_button_percent_width" />
+
+    <TextView
+        android:id="@+id/report_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:text="Edit Selections"
+        app:layout_constraintEnd_toEndOf="@+id/report_edit_button"
+        app:layout_constraintStart_toStartOf="@+id/report_edit_button"
+        app:layout_constraintTop_toBottomOf="@+id/report_edit_button" />
+
+    <TextView
+        android:id="@+id/report_delete_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="@dimen/report_view_disabled_alpha"
+        android:text="Delete All"
+        app:layout_constraintEnd_toEndOf="@+id/report_delete_button"
+        app:layout_constraintStart_toStartOf="@+id/report_delete_button"
+        app:layout_constraintTop_toBottomOf="@+id/report_delete_button" />
 
 </android.support.constraint.ConstraintLayout>

@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -42,24 +41,26 @@ import static android.app.Activity.RESULT_OK;
  *
  * TODO: If the user takes a picture and closes the app without being submitted, that image is still saved.
  * TODO: Allow multiple pictures to be taken?
+ * TODO: Add edit functionality.
+ * TODO: Add max pictures limit.
  */
 public class ReportFragment extends Fragment {
 
-    private ToggleButton yes_button, no_button, creeping_button, climbing_button, shrub_button, camera_button;
-    private Button submit_button;
+    private ToggleButton yes_button, no_button, creeping_button, climbing_button, shrub_button;
+    private Button camera_button, delete_button, submit_button, edit_button;
     private ToggleButtonGroup question1Group, question2Group;
 
-    private AnimatorSet question2Fade, question3Fade;
+    private AnimatorSet question2Fade, question3Fade, imageEditFade;
     private Interpolator forwardInterpolator, reverseInterpolator;
 
-    private File currentImageFile;
+    private List<File> currentImageFiles;
 
     private OnReportSubmittedListener reportCallback;
 
     final String AUTHORITY = "com.hci_capstone.poison_ivy_tracker.fileprovider";
 
     public ReportFragment() {
-
+        currentImageFiles = new ArrayList<>();
     }
 
     public interface OnReportSubmittedListener {
@@ -82,7 +83,9 @@ public class ReportFragment extends Fragment {
         creeping_button = (ToggleButton) view.findViewById(R.id.report_creeping_button);
         climbing_button = (ToggleButton) view.findViewById(R.id.report_climbing_button);
         shrub_button = (ToggleButton) view.findViewById(R.id.report_shrub_button);
-        camera_button = (ToggleButton) view.findViewById(R.id.report_camera_button);
+        camera_button = (Button) view.findViewById(R.id.report_camera_button);
+        delete_button = (Button) view.findViewById(R.id.report_delete_button);
+        edit_button = (Button) view.findViewById(R.id.report_edit_button);
         submit_button = (Button) view.findViewById(R.id.report_submit_button);
 
         createFadeAnimations(view);
@@ -112,12 +115,17 @@ public class ReportFragment extends Fragment {
                     if (camera_button.isEnabled()) {
                         performFadeOutFor(question3Fade);
                     }
+                    if (delete_button.isEnabled()) {
+                        performFadeOutFor(imageEditFade);
+                        deleteAllImages();
+                    }
 
                     question2Group.setEnabled(false);
                     question2Group.clearCheck();
 
                     camera_button.setEnabled(false);
-                    camera_button.setChecked(false);
+                    delete_button.setEnabled(false);
+                    edit_button.setEnabled(false);
 
                     submit_button.setEnabled(true);
                 }
@@ -133,23 +141,32 @@ public class ReportFragment extends Fragment {
                     camera_button.setEnabled(true);
                     performFadeInFor(question3Fade);
                     submit_button.setEnabled(true);
+
+                    // Check if we need to enable the edit buttons.
+                    if (currentImageFiles.size() > 0) {
+                        edit_button.setEnabled(true);
+                        delete_button.setEnabled(true);
+                        performFadeInFor(imageEditFade);
+                    }
                 }
             }
         });
 
-        camera_button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        camera_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+            public void onClick(View view) {
+                dispatchTakePictureIntent();
+            }
+        });
 
-                // Check if the current image is null to prevent the camera from opening when
-                // returning to the report fragment.
-                if (isChecked && currentImageFile == null) {
-                    dispatchTakePictureIntent();
-                }
-                else if (!isChecked && currentImageFile != null) {
-                    deleteCurrentImage();
-                    Toast.makeText(getContext(), "Image deleted.", Toast.LENGTH_SHORT).show();
-                }
+        delete_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteAllImages();
+                delete_button.setEnabled(false);
+                edit_button.setEnabled(false);
+                performFadeOutFor(imageEditFade);
+                Toast.makeText(getContext(), "Deleted images.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -158,16 +175,18 @@ public class ReportFragment extends Fragment {
             public void onClick(View view) {
                 boolean ivyPresent = question1Group.getCurSelectedTag().equals("yes");
                 String ivyType = question2Group.getCurSelectedTag();
-                String imageLocation = currentImageFile != null ? currentImageFile.getAbsolutePath() : null;
 
-                // Temporary code to convert one picture to list
-                List<String> imageLocations = new ArrayList<String>();
-                imageLocations.add(imageLocation);
-                // End Temp Code
+                List<String> imageLocations = null;
+                if (currentImageFiles.size() > 0) {
+                    imageLocations = new ArrayList<>();
+                    for (File f : currentImageFiles) {
+                        imageLocations.add(f.getAbsolutePath());
+                    }
+                }
 
                 reportCallback.onReportSubmitted(ivyPresent, ivyType, imageLocations);
 
-                Log.v("IVY_REPORT", "Info submitted: " + ivyPresent + " " + ivyType + " " + imageLocation);
+                Log.v("IVY_REPORT", "Info submitted: " + ivyPresent + " " + ivyType + " " + imageLocations);
                 Toast.makeText(getContext(), "Report submitted!", Toast.LENGTH_SHORT).show();
                 reset();
             }
@@ -180,7 +199,7 @@ public class ReportFragment extends Fragment {
      * Reset the view.
      */
     public void reset() {
-        currentImageFile = null;
+        currentImageFiles.clear();
         submit_button.setEnabled(false);
 
         question1Group.clearCheck();
@@ -192,10 +211,14 @@ public class ReportFragment extends Fragment {
             performFadeOutFor(question2Fade);
         }
 
-        camera_button.setChecked(false);
         if (camera_button.isEnabled()) {
             camera_button.setEnabled(false);
             performFadeOutFor(question3Fade);
+        }
+        if (delete_button.isEnabled()) {
+            delete_button.setEnabled(false);
+            edit_button.setEnabled(false);
+            performFadeOutFor(imageEditFade);
         }
     }
 
@@ -224,6 +247,7 @@ public class ReportFragment extends Fragment {
     private void createFadeAnimations(View view) {
         question2Fade = new AnimatorSet();
         question3Fade = new AnimatorSet();
+        imageEditFade = new AnimatorSet();
         forwardInterpolator = new ForwardInterpolator();
         reverseInterpolator = new ReverseInterpolator();
 
@@ -260,6 +284,17 @@ public class ReportFragment extends Fragment {
                 createSingleFadeAnimation(camera_text, animationDuration),
                 createSingleFadeAnimation(divider3, animationDuration),
                 createSingleFadeAnimation(camera_button, animationDuration)
+        );
+
+        // Create the fade animation for the edit buttons.
+        TextView delete_text = (TextView) view.findViewById(R.id.report_delete_text);
+        TextView edit_text = (TextView) view.findViewById(R.id.report_edit_text);
+
+        imageEditFade.playTogether(
+                createSingleFadeAnimation(delete_button, animationDuration),
+                createSingleFadeAnimation(delete_text, animationDuration),
+                createSingleFadeAnimation(edit_button, animationDuration),
+                createSingleFadeAnimation(edit_text, animationDuration)
         );
 
     }
@@ -310,10 +345,8 @@ public class ReportFragment extends Fragment {
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             File photoFile = null;
             try {
-                if (currentImageFile != null) {
-                    deleteCurrentImage();
-                }
                 photoFile = createImageFile();
+                currentImageFiles.add(photoFile);
             }
             catch (IOException e) {
                 Log.v("IVY_IMAGE_CAPTURE", "Failed to create photo file.");
@@ -330,15 +363,20 @@ public class ReportFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Log.v("IVY_IMAGE_CAPTURE", "Successfully took picture.");
-            reduceImageSize(currentImageFile);
+
+            // Enable picture editing.
+            delete_button.setEnabled(true);
+            edit_button.setEnabled(true);
+            performFadeInFor(imageEditFade);
+
+            // Reduce the image size.
+            reduceImageSize(getNewestImage());
         }
         else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_CANCELED){
             Log.v("IVY_IMAGE_CAPTURE", "Picture was cancelled.");
 
             // Delete the empty temp file.
-            deleteCurrentImage();
-
-            camera_button.setChecked(false);
+            deleteNewestImage();
         }
     }
 
@@ -358,17 +396,37 @@ public class ReportFragment extends Fragment {
                 storageDir
         );
 
-        currentImageFile = image;
         return image;
     }
 
     /**
      * Delete the current file if it exists.
      */
-    private void deleteCurrentImage() {
-        if (currentImageFile != null) {
-            currentImageFile.delete();
-            currentImageFile = null;
+    private void deleteNewestImage() {
+        if (currentImageFiles.size() >= 1) {
+            File current = currentImageFiles.remove(currentImageFiles.size() - 1);
+            current.delete();
+        }
+    }
+
+    /**
+     * Get the last image to be added to the list.
+     * @return the last image
+     */
+    private File getNewestImage() {
+        if (currentImageFiles.size() >= 1) {
+            return currentImageFiles.get(currentImageFiles.size() - 1);
+        }
+        return null;
+    }
+
+    /**
+     * Deletes all the current images.
+     */
+    private void deleteAllImages() {
+        while (currentImageFiles.size() > 0) {
+            File image = currentImageFiles.remove(0);
+            image.delete();
         }
     }
 

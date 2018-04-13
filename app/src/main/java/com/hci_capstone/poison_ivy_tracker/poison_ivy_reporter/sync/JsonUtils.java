@@ -58,8 +58,10 @@ public class JsonUtils {
         reportJson.put("date", report.getDate().toString());
 
         JSONArray imagesJson = new JSONArray();
-        for (String location : report.getImageLocations()) {
-            imagesJson.put(imageToString(location));
+        if (report.getImageLocations() !=  null) {
+            for (String location : report.getImageLocations()) {
+                imagesJson.put(imageToString(location));
+            }
         }
         reportJson.put("images", imagesJson);
         return reportJson;
