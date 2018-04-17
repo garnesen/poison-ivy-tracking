@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:id="@+id/image_chooser_item">
+
+    <ImageView
+        android:id="@+id/grid_image_imageview"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/grid_image_check"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="8dp"
+        android:adjustViewBounds="true"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/grid_image_imageview"
+        app:layout_constraintTop_toTopOf="@+id/grid_image_imageview" />
+
+
+</android.support.constraint.ConstraintLayout>

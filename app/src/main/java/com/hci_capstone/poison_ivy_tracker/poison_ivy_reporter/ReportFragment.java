@@ -23,6 +23,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
 
 import com.hci_capstone.poison_ivy_tracker.R;
+import com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter.image_chooser.ImageChooserActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,11 +41,11 @@ import static android.app.Activity.RESULT_OK;
  * Fragment of the bottom navigation bar that allows the user to submit a report.
  *
  * TODO: If the user takes a picture and closes the app without being submitted, that image is still saved.
- * TODO: Allow multiple pictures to be taken?
- * TODO: Add edit functionality.
  * TODO: Add max pictures limit.
  */
 public class ReportFragment extends Fragment {
+
+    public static final String IMAGE_LIST_EXTRA = "image_list";
 
     private ToggleButton yes_button, no_button, creeping_button, climbing_button, shrub_button;
     private Button camera_button, submit_button, edit_button;
@@ -159,10 +160,13 @@ public class ReportFragment extends Fragment {
         edit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteAllImages();
-                edit_button.setEnabled(false);
-                performFadeOutFor(imageEditFade);
-                Toast.makeText(getContext(), "Deleted images.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), ImageChooserActivity.class);
+                ArrayList<String> imageList = new ArrayList<>();
+                for (File f : currentImageFiles) {
+                    imageList.add(f.getAbsolutePath());
+                }
+                intent.putStringArrayListExtra(IMAGE_LIST_EXTRA, imageList);
+                startActivityForResult(intent, REQUEST_IMAGE_CHOOSER);
             }
         });
 
@@ -327,7 +331,8 @@ public class ReportFragment extends Fragment {
      *    CAMERA CONTROL    *
      ************************/
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_CHOOSER = 2;
 
     /**
      * Starts the default camera app and saves the image in internal storage.
@@ -353,21 +358,48 @@ public class ReportFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Log.v("IVY_IMAGE_CAPTURE", "Successfully took picture.");
+        if (requestCode == REQUEST_IMAGE_CAPTURE) {
+            if (resultCode == RESULT_OK) {
+                Log.v("IVY_IMAGE_CAPTURE", "Successfully took picture. Stored at: " + getNewestImage().getAbsolutePath());
 
-            // Enable picture editing.
-            edit_button.setEnabled(true);
-            performFadeInFor(imageEditFade);
+                // Enable picture editing.
+                edit_button.setEnabled(true);
+                performFadeInFor(imageEditFade);
 
-            // Reduce the image size.
-            reduceImageSize(getNewestImage());
+                // Reduce the image size.
+                reduceImageSize(getNewestImage());
+            }
+            else if (resultCode == RESULT_CANCELED) {
+                Log.v("IVY_IMAGE_CAPTURE", "Picture was cancelled.");
+
+                // Delete the empty temp file.
+                deleteNewestImage();
+            }
         }
-        else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_CANCELED){
-            Log.v("IVY_IMAGE_CAPTURE", "Picture was cancelled.");
+        else if (requestCode == REQUEST_IMAGE_CHOOSER) {
+            if (resultCode == RESULT_OK) {
+                Log.v("IVY_IMAGE_CHOOSER", "Image editing complete.");
+                List<String> deletedImages = data.getStringArrayListExtra(ImageChooserActivity.RETURN_EXTRA);
 
-            // Delete the empty temp file.
-            deleteNewestImage();
+                // Delete and remove the files returned from the ImageChooserActivity.
+                for (int i = 0; i < currentImageFiles.size(); i++) {
+                    File f = currentImageFiles.get(i);
+                    if (deletedImages.contains(f.getAbsolutePath())) {
+                        f.delete();
+                        currentImageFiles.remove(f);
+                        i--;
+                    }
+                }
+
+                // Set edit button to be disabled if no pictures are left.
+                if (currentImageFiles.size() == 0) {
+                    edit_button.setEnabled(false);
+                    performFadeOutFor(imageEditFade);
+                }
+            }
+            else if (resultCode == RESULT_CANCELED) {
+                Log.v("IVY_IMAGE_CHOOSER", "Image editing was cancelled.");
+            }
         }
     }
 
