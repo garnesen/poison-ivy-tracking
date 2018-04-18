@@ -3,10 +3,10 @@
     <string name="climbingDescription">
     <![CDATA[
     <ul>
-        <li>If leaves are present you will see the left then right pattern</li>
-        <li>If there are no leaves than you can tell it is poison ivy by the hairy vine</li>
-        <li>Can often climb for an amount and then branch out looking for sun</li>
-        <li>Often will be over the trail where someone would push the branch out of the way and have a rude surprise in the morning!</li>
+        <li>Poison ivy vines that climb vertical surfaces, typically attaching with “hairy” aerial roots </li>
+        <li>The amount of hairy roots produced varies greatly from a few to a dense red mat of aerial roots</li>
+        <li>The vertically climbing vines put out horizontal branches displaying typical poison ivy shape “leaves-of-three”.</li>
+        <li>When the climbing vine reaches the top of vertical surface it will extensively branch, forming a dome-like canopy</li>
     </ul>
     ]]>
     </string>
@@ -14,13 +14,24 @@
     <string name="shrubDescription">
     <![CDATA[
     <ul style="list-style-type:circle">
-        <li>Shrubs will grow a host up and have a shrub at the top</li>
-        <li>They can climb up buildings, fences, signs and more</li>
-        <li>Can very rarely attach to their own vines and grow higher</li>
+        <li>Typically several free-standing shoots emerge from ground</li>
+        <li>Continue to branch and grow out</li>
+        <li>Shrub must be 3 feet high</li>
     </ul>
     ]]>
-    </string>
-    <string name="location_error_title">Uh-Oh!</string>
+</string>
+
+    <string name="creepingDescription">
+    <![CDATA[
+    <ul style="list-style-type:circle">
+        <li>Poison ivy vines that grow along the ground</li>
+        <li>The vertical free standing branches/shoots are a dull brown color that attain a maximum height of no more than ~2.5 feet (often shorter)</li>
+        <li>The horizontal vines are red colored and can form an extensive web of interconnected red branchesh</li>
+    </ul>
+    ]]>
+</string>
+
+<string name="location_error_title">Uh-Oh!</string>
     <string name="location_error_content">This project requires the use of location! Without it, the collected data will not be helpful. Please turn on location services and try again.</string>
     <string name="preference_file_key">ivy_shared_preferences</string>
     <string name="guid_key">ivy_guid</string>

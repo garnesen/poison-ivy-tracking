@@ -18,11 +18,11 @@ import com.hci_capstone.poison_ivy_tracker.R;
 public class IdentifyFragment extends Fragment {
 
 
-    LinearLayout ivyDescription, creepingDescription, climbingDescription, shrubDescription;
-    ImageView ivyTitleImg, creepingTitleImg, climbingTitleImg, shrubTitleImg;
-    ImageView ivyDescriptionImg, creepingDescriptionImg,climbingDescriptionImg, shrubDescriptionImg;
-    CardView cvIvy, cvCreeping, cvClimbing, cvShrub;
-    TextView climbingText, shrubText;
+    LinearLayout creepingDescription, climbingDescription, shrubDescription;
+    ImageView  creepingTitleImg, climbingTitleImg, shrubTitleImg;
+    ImageView  creepingDescriptionImg,climbingDescriptionImg, shrubDescriptionImg;
+    CardView  cvCreeping, cvClimbing, cvShrub;
+    TextView climbingText, shrubText, creepingText;
 
     ValueAnimator mAnimator;
 
@@ -38,20 +38,15 @@ public class IdentifyFragment extends Fragment {
         //Set the text for the descriptions
         climbingText = view.findViewById(R.id.climbingText);
         shrubText = view.findViewById(R.id.shrubText);
+        creepingText = view.findViewById(R.id.creepingText);
 
         climbingText.setText(Html.fromHtml(getString(R.string.climbingDescription)));
-        shrubText.setText(Html.fromHtml(getString(R.string.shrubDescription)));;
+        shrubText.setText(Html.fromHtml(getString(R.string.shrubDescription)));
+        creepingText.setText(Html.fromHtml(getString(R.string.creepingDescription)));
+
 
         // Get the elements for each card and set the arrow
 
-        //Ivy
-        ivyTitleImg = view.findViewById(R.id.ivy_title_img);
-        ivyDescription = view.findViewById(R.id.ivy_description);
-        ivyDescriptionImg = view.findViewById(R.id.ivy_description_img);
-        cvIvy = view.findViewById(R.id.cvIvy);
-        //Set ivy as open on load
-        ivyTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24px);
-        expand(ivyDescription);
 
         //Creeping
         creepingTitleImg = view.findViewById(R.id.creeping_title_img);
@@ -78,22 +73,22 @@ public class IdentifyFragment extends Fragment {
 
 
         //Listen for clicks on any part of the Ivy card
-        cvIvy.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (ivyDescription.getVisibility() == View.GONE) {
-                    // it's collapsed - expand it
-                    expand(ivyDescription);
-                    collapseAllOthers(ivyDescription);
-                    ivyTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24px);
-                }
+//        cvIvy.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                if (ivyDescription.getVisibility() == View.GONE) {
+//                    // it's collapsed - expand it
+//                    expand(ivyDescription);
+//                    collapseAllOthers(ivyDescription);
+//                    ivyTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24px);
+//                }
 //                else {
 //                    // it's expanded - collapse it
 //                    collapse(ivyDescription);
 //                    ivyTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
 //                }
 
-            }
-        });
+//            }
+//        });
 
         cvCreeping.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -103,11 +98,10 @@ public class IdentifyFragment extends Fragment {
                     collapseAllOthers(creepingDescription);
                     creepingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24px);
                 }
-//                else {
-//                    // it's expanded - collapse it
-//                    collapse(creepingDescription);
-//                    creepingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
-//                }
+                else
+                {
+                    collapseAll();
+                }
 
             }
         });
@@ -120,11 +114,10 @@ public class IdentifyFragment extends Fragment {
                     collapseAllOthers(climbingDescription);
                     climbingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24px);
                 }
-//                else {
-//                    // it's expanded - collapse it
-//                    collapse(climbingDescription);
-//                    climbingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
-//                }
+                else
+                {
+                    collapseAll();
+                }
 
             }
         });
@@ -137,11 +130,11 @@ public class IdentifyFragment extends Fragment {
                     collapseAllOthers(shrubDescription);
                     shrubTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24px);
                 }
-//                else {
-//                    // it's expanded - collapse it
-//                    collapse(shrubDescription);
-//                    shrubTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
-//                }
+                else
+                {
+                    collapseAll();
+                }
+
 
             }
         });
@@ -166,46 +159,38 @@ public class IdentifyFragment extends Fragment {
         mAnimator.start();
     }
 
+    private void collapseAll()
+    {
+        collapse(climbingDescription);
+        collapse(creepingDescription);
+        collapse(shrubDescription);
+        climbingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
+        creepingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
+        shrubTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
+    }
 
     private void collapseAllOthers(LinearLayout l)
     {
-        if(l == ivyDescription)
-        {
-            collapse(climbingDescription);
-            collapse(creepingDescription);
-            collapse(shrubDescription);
-            climbingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
-            creepingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
-            shrubTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
-
-
-        }
         if(l == climbingDescription)
         {
-            collapse(ivyDescription);
             collapse(creepingDescription);
             collapse(shrubDescription);
-            ivyTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
             creepingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
             shrubTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
         }
         if(l == creepingDescription)
         {
             collapse(climbingDescription);
-            collapse(ivyDescription);
             collapse(shrubDescription);
             climbingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
-            ivyTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
             shrubTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
         }
         if(l == shrubDescription)
         {
             collapse(climbingDescription);
             collapse(creepingDescription);
-            collapse(ivyDescription);
             climbingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
             creepingTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
-            ivyTitleImg.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24px);
         }
 
     }
