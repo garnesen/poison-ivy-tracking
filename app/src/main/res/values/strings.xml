@@ -3,10 +3,10 @@
     <string name="climbingDescription">
     <![CDATA[
     <ul>
-        <li>If leaves are present you will see the left than right patter</li>
-        <li>If there are no leaves than you can tell it is poison ivy by the hairy vine </li>
-        <li>Can often climb for an amount and then branch out looking for sun </li>
-        <li>Often will be over the trail where someone would push the branch out of the way and have a rude surprise in the morning! </li>
+        <li>If leaves are present you will see the left then right pattern</li>
+        <li>If there are no leaves than you can tell it is poison ivy by the hairy vine</li>
+        <li>Can often climb for an amount and then branch out looking for sun</li>
+        <li>Often will be over the trail where someone would push the branch out of the way and have a rude surprise in the morning!</li>
     </ul>
     ]]>
     </string>
@@ -14,9 +14,9 @@
     <string name="shrubDescription">
     <![CDATA[
     <ul style="list-style-type:circle">
-        <li>Shrubs will grow a host up and have a shrub at the top </li>
-        <li>They can climb up buildings, fences, signs and more </li>
-        <li>Can very rarely attach to their own vines and grow higher </li>
+        <li>Shrubs will grow a host up and have a shrub at the top</li>
+        <li>They can climb up buildings, fences, signs and more</li>
+        <li>Can very rarely attach to their own vines and grow higher</li>
     </ul>
     ]]>
     </string>
