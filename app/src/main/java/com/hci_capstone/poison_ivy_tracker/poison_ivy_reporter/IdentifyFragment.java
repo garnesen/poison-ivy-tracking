@@ -15,10 +15,6 @@ import android.widget.TextView;
 
 import com.hci_capstone.poison_ivy_tracker.R;
 
-/**
- * Created by Jason Merewitz
- */
-
 public class IdentifyFragment extends Fragment {
 
 
