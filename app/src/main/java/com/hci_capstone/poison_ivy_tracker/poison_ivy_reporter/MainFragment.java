@@ -28,6 +28,7 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
 
     private BottomNavigationView bottomNavigationView;
     private List<Fragment> fragments;
+    private Fragment reportFragment;
     private boolean fragmentIsAlive;
 
     private GetLocationListener locationCallback;
@@ -112,7 +113,7 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
     private void buildFragmentsList() {
         fragments = new ArrayList<>(5);
 
-        Fragment reportFragment = new ReportFragment();
+        reportFragment = new ReportFragment();
         Fragment identifyFragment = new IdentifyFragment();
         Fragment leaderboardsFragment = new LeaderboardFragment();
         Fragment aboutFragment = new AboutFragment();
@@ -156,5 +157,6 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
     public void onDestroy() {
         super.onDestroy();
         fragmentIsAlive = false;
+        ((ReportFragment) reportFragment).cleanUpImages();
     }
 }

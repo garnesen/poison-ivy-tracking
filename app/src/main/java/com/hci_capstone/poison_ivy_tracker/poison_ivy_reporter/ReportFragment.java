@@ -40,7 +40,6 @@ import static android.app.Activity.RESULT_OK;
 /**
  * Fragment of the bottom navigation bar that allows the user to submit a report.
  *
- * TODO: If the user takes a picture and closes the app without being submitted, that image is still saved.
  * TODO: Add max pictures limit.
  */
 public class ReportFragment extends Fragment {
@@ -219,6 +218,16 @@ public class ReportFragment extends Fragment {
             edit_button.setEnabled(false);
             performFadeOutFor(imageEditFade);
         }
+    }
+
+    /**
+     * Deletes all current image files. This is called from the main fragment when it is destroyed.
+     */
+    public void cleanUpImages() {
+        for (File f : currentImageFiles) {
+            f.delete();
+        }
+        currentImageFiles.clear();
     }
 
     /**
