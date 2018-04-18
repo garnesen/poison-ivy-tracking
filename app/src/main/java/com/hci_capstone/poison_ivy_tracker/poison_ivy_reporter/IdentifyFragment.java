@@ -9,6 +9,8 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -145,18 +147,37 @@ public class IdentifyFragment extends Fragment {
         return view;
     }
 
-    private void expand(LinearLayout l){
-        //set Visible
+    /**
+     * Expand a view from 0 height to full.
+     * Code from: https://stackoverflow.com/questions/4946295/android-expand-collapse-animation
+     * @param l the linear layout to expand
+     */
+    private void expand(final LinearLayout l){
+        l.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        final int targetHeight = l.getMeasuredHeight();
 
-
+        // Older versions of android (pre API 21) cancel animations for views with a height of 0.
+        l.getLayoutParams().height = 1;
         l.setVisibility(View.VISIBLE);
-		final int widthSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-		final int heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        l.measure(widthSpec, heightSpec);
-		mAnimator = slideAnimator(l, 0, l.getMeasuredHeight());
+        Animation a = new Animation()
+        {
+            @Override
+            protected void applyTransformation(float interpolatedTime, Transformation t) {
+                l.getLayoutParams().height = interpolatedTime == 1
+                        ? ViewGroup.LayoutParams.WRAP_CONTENT
+                        : (int)(targetHeight * interpolatedTime);
+                l.requestLayout();
+            }
 
+            @Override
+            public boolean willChangeBounds() {
+                return true;
+            }
+        };
 
-        mAnimator.start();
+        // 1dp/ms
+        a.setDuration((int)(targetHeight / l.getContext().getResources().getDisplayMetrics().density));
+        l.startAnimation(a);
     }
 
     private void collapseAll()

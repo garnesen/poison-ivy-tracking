@@ -1,87 +1,49 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:>
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="@dimen/activity_horizontal_margin"
     android:weightSum="3">
+
     <!--Ivy itself-->
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/ivy_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="24sp"
+        android:layout_marginBottom="8dp"
+        android:text="Identify Poison Ivy" />
+
+    <ImageView
+        android:id="@+id/ivy_description_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:id="@+id/ivy_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:minHeight="48dp">
-            <TextView
-                android:id="@+id/ivy_title_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="12dp"
-                android:textSize="24sp"
-                android:layout_centerHorizontal="true"
-                android:text="Identify Poison Ivy" />
-
-            <ImageView
-                android:id="@+id/ivy_title_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/ivy_title_text"
-                android:layout_marginRight="30dp"
-                android:layout_centerVertical="true"/>
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/ivy_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:minHeight="48dp"
-            android:orientation="horizontal"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
-            android:paddingBottom="10dp">
-
-
-            <ImageView
-                android:id="@+id/ivy_description_img"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0.1"
-                android:background="@drawable/identify_poison_ivy"
-                />
-
-
-
-        </LinearLayout>
-
-    </LinearLayout>
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/identify_poison_ivy" />
 
     <!--Growth Patterns Header-->
-    <RelativeLayout
-        android:id="@+id/growth_title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:minHeight="48dp">
+
     <TextView
         android:id="@+id/growth_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
         android:textSize="24sp"
         android:text= "Different Ivy Growth Patterns"
-        android:layout_centerHorizontal="true"></TextView>
-    </RelativeLayout>
+        android:layout_marginBottom="8dp"/>
 
     <!--Creeping Ivy-->
+
     <android.support.v7.widget.CardView
         android:id="@+id/cvcreeping"
         android:layout_width="match_parent"
@@ -119,35 +81,32 @@
                 android:id="@+id/creeping_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 android:minHeight="48dp"
                 android:orientation="vertical"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
                 android:visibility="gone">
 
-
                 <ImageView
                     android:id="@+id/creeping_description_img"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.1"
-                    android:background="@drawable/identify_creeping"
-                    />
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/identify_creeping" />
 
                 <TextView
                     android:id="@+id/creepingText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="4dp"
                     android:layout_marginTop="10dp" />
-
 
             </LinearLayout>
 
         </LinearLayout>
-
 
     </android.support.v7.widget.CardView>
 
@@ -200,12 +159,12 @@
 
                 <ImageView
                     android:id="@+id/climbing_description_img"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.1"
-                    android:background="@drawable/climbing_ivy"
-                    />
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/climbing_ivy" />
 
                 <TextView
                     android:id="@+id/climbingText"
@@ -271,12 +230,12 @@
 
                 <ImageView
                     android:id="@+id/shrub_description_img"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.1"
-                    android:background="@drawable/identify_ivy_shrub"
-                    />
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/identify_ivy_shrub" />
 
                 <TextView
                     android:id="@+id/shrubText"
