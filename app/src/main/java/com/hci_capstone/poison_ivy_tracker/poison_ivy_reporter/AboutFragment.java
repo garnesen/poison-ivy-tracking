@@ -10,19 +10,11 @@ import android.widget.Button;
 
 import com.hci_capstone.poison_ivy_tracker.R;
 
-/**
- * Created by douglasbotello on 2/23/18.
- */
-
 public class AboutFragment extends Fragment {
 
     Button linkButton;
 
-
-
-    public AboutFragment() {
-
-    }
+    public AboutFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,10 +25,9 @@ public class AboutFragment extends Fragment {
         linkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AboutFragment.this.getActivity(), IvyResearchWebView.class));
+                startActivity(new Intent(getActivity(), IvyResearchWebView.class));
             }
         });
-
 
         return rootView;
     }

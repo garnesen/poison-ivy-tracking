@@ -11,24 +11,17 @@ import android.widget.ProgressBar;
 
 import com.hci_capstone.poison_ivy_tracker.R;
 
-/**
- * Created by Douglas on 3/12/2018.
- */
-
 public class IvyResearchWebView  extends Activity {
 
-    WebView webView;
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ivy_research_web_view);
 
-
-
         webView = findViewById(R.id.Ivy_Research_Web_View);
         WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient() {
@@ -38,7 +31,6 @@ public class IvyResearchWebView  extends Activity {
             }
         });
         webView.loadUrl("https://vtnews.vt.edu/articles/2016/07/070516-cals-poisinuvy.html");
-
     }
 
 
