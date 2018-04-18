@@ -15,9 +15,9 @@
 
     <ImageView
         android:id="@+id/grid_image_check"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_margin="8dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="4dp"
         android:adjustViewBounds="true"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/grid_image_imageview"
