@@ -15,12 +15,6 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/bottombaritem_leaderboards"
-        android:icon="@android:drawable/ic_menu_gallery"
-        android:title="Leaderboards"
-        app:showAsAction="ifRoom"/>
-
-    <item
         android:id="@+id/bottombaritem_about"
         android:icon="@android:drawable/ic_dialog_info"
         android:title="About"

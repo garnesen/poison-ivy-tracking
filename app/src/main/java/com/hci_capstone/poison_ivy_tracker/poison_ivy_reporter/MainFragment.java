@@ -35,7 +35,7 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
     private SimpleLocation location;
 
     enum FragmentTag {
-        REPORT, IDENTIFY, LEADERBOARDS, ABOUT
+        REPORT, IDENTIFY, ABOUT
     }
 
     @Override
@@ -60,7 +60,7 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
         location = locationCallback.getLocation();
 
         bottomNavigationView = (BottomNavigationView) rootView.findViewById(R.id.bottom_nav);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+        // (Only for > 3 nav items) BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -70,9 +70,6 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
                         return true;
                     case R.id.bottombaritem_identify:
                         switchToFragment(FragmentTag.IDENTIFY);
-                        return true;
-                    case R.id.bottombaritem_leaderboards:
-                        switchToFragment(FragmentTag.LEADERBOARDS);
                         return true;
                     case R.id.bottombaritem_about:
                         switchToFragment(FragmentTag.ABOUT);
@@ -115,12 +112,10 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
 
         reportFragment = new ReportFragment();
         Fragment identifyFragment = new IdentifyFragment();
-        Fragment leaderboardsFragment = new LeaderboardFragment();
         Fragment aboutFragment = new AboutFragment();
 
         fragments.add(reportFragment);
         fragments.add(identifyFragment);
-        fragments.add(leaderboardsFragment);
         fragments.add(aboutFragment);
     }
 
