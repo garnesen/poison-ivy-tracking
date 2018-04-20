@@ -112,6 +112,7 @@ public class ImageChooserActivity extends AppCompatActivity {
         private List<String> imageLocations;
         private List<GridImage> gridImages;
         private int numChecked;
+        private GridImage expandedGridImage;
 
         public ImageAdapter(Context context, List<String> imageLocations) {
             this.imageLocations = imageLocations;
@@ -130,6 +131,8 @@ public class ImageChooserActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         if (gridImage.getState() == GridImage.State.NO_CHECK) {
                             expander.zoomImageFromThumb(gridImage.getImageView(), bitmap);
+                            expandedGridImage = gridImage;
+                            showTrashIcon(true);
                         }
                         else if (gridImage.getState() == GridImage.State.CHECKED){
                             gridImage.setState(GridImage.State.UNCHECKED);
@@ -217,6 +220,13 @@ public class ImageChooserActivity extends AppCompatActivity {
          */
         public List<String> deleteSelectedImages() {
             List<String> selectedLocations = new ArrayList<>();
+            if (numChecked == 0 && expander.isExpanded()) {
+                expander.zoomBackNoAnimation();
+                gridImages.remove(expandedGridImage);
+                selectedLocations.add((String)expandedGridImage.getTag());
+                this.notifyDataSetChanged();
+                return selectedLocations;
+            }
             for (int i = 0; i < gridImages.size(); i++) {
                 GridImage g = gridImages.get(i);
                 if (g.getState() == GridImage.State.CHECKED) {
@@ -362,6 +372,15 @@ public class ImageChooserActivity extends AppCompatActivity {
                     zoomBackToThumb();
                 }
             });
+        }
+
+        public void zoomBackNoAnimation() {
+            isExpanded = false;
+            showTrashIcon(false);
+            gridView.setAlpha(1f);
+            thumbView.setAlpha(1f);
+            expandedImageView.setVisibility(View.GONE);
+            mCurrentAnimator = null;
         }
 
         public void zoomBackToThumb() {
