@@ -463,7 +463,6 @@ public class ReportFragment extends Fragment {
     }
 
     /**
-     * TODO: Create a smarter image size reduction?
      * Overwrites an image file with a size reduced version of it.
      * @param file
      * @return the file
