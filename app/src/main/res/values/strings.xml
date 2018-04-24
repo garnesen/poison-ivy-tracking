@@ -5,7 +5,7 @@
     <ul>
         <li>Poison ivy vines that climb vertical surfaces, typically attaching with “hairy” aerial roots </li>
         <li>The amount of hairy roots produced varies greatly from a few to a dense red mat of aerial roots</li>
-        <li>The vertically climbing vines put out horizontal branches displaying typical poison ivy shape “leaves-of-three”.</li>
+        <li>The vertically climbing vines put out horizontal branches displaying typical poison ivy shape “leaves-of-three”</li>
         <li>When the climbing vine reaches the top of vertical surface it will extensively branch, forming a dome-like canopy</li>
     </ul>
     ]]>
@@ -26,7 +26,7 @@
     <ul style="list-style-type:circle">
         <li>Poison ivy vines that grow along the ground</li>
         <li>The vertical free standing branches/shoots are a dull brown color that attain a maximum height of no more than ~2.5 feet (often shorter)</li>
-        <li>The horizontal vines are red colored and can form an extensive web of interconnected red branchesh</li>
+        <li>The horizontal vines are red colored and can form an extensive web of interconnected red branches</li>
     </ul>
     ]]>
 </string>
@@ -35,5 +35,5 @@
     <string name="location_error_content">This project requires the use of location! Without it, the collected data will not be helpful. Please turn on location services and try again.</string>
     <string name="preference_file_key">ivy_shared_preferences</string>
     <string name="guid_key">ivy_guid</string>
-    <string name="server_url"> http://18.222.74.126:3000/update/</string>
+    <string name="server_url">http://18.222.74.126:3000/update/</string>
 </resources>

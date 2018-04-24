@@ -8,12 +8,12 @@
         <EditTextPreference
             android:key="pref_screen_name"
             android:title="Screen Name"
-            android:summary="Screen name for high score lists." />
+            android:summary="A custom name to identify you for report recognition." />
 
         <EditTextPreference
             android:key="pref_email"
             android:title="Email"
-            android:summary="A way to contact you if you are a frequent reporter." />
+            android:summary="A way to contact you!" />
 
     </PreferenceCategory>
 

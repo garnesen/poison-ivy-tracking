@@ -35,7 +35,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         data.putString("pref_key", key);
         data.putString("pref_data", sharedPreferences.getString(key, ""));
 
-        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(getContext().getApplicationContext()));
+        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(getActivity()));
         Job uploadJob = dispatcher.newJobBuilder()
                 // Set the JobService that will be called.
                 .setService(SettingsSyncService.class)
