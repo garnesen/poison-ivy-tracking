@@ -11,6 +11,9 @@ import android.widget.ProgressBar;
 
 import com.hci_capstone.poison_ivy_tracker.R;
 
+/**
+ * A webview for loading external web pages.
+ */
 public class IvyResearchWebView  extends Activity {
 
     private WebView webView;

@@ -9,6 +9,9 @@ import android.widget.Button;
 
 import com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter.MainFragment;
 
+/**
+ * The first fragment that is loaded in the MainActivity. The user picks a project here.
+ */
 public class HomePageFragment extends Fragment {
 
     private OnProjectSelected callback;

@@ -7,6 +7,9 @@ import android.widget.ImageView;
 
 import com.hci_capstone.poison_ivy_tracker.R;
 
+/**
+ * A widget that shows an image as a square and can be marked as unchecked, checked, or no check.
+ */
 public class GridImage extends FrameLayout {
 
     private ImageView image;

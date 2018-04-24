@@ -14,6 +14,9 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
+/**
+ * Utility class for creating JSON objects.
+ */
 public class JsonUtils {
 
     private static String LOG_TAG = "JsonUtils";

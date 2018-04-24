@@ -27,6 +27,9 @@ import com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter.ReportFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Activity for selecting images from a given set.
+ */
 public class ImageChooserActivity extends AppCompatActivity {
 
     public static final String RETURN_EXTRA = "deleted_image_list";

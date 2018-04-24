@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * A fragment that is shown when the requested project requires location services.
+ */
 public class LocationErrorFragment extends Fragment {
 
     @Override

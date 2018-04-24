@@ -17,6 +17,9 @@ import android.widget.TextView;
 
 import com.hci_capstone.poison_ivy_tracker.R;
 
+/**
+ * Fragment that presents information about identifying poison ivy and different growth patterns.
+ */
 public class IdentifyFragment extends Fragment {
 
 

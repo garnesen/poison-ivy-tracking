@@ -27,6 +27,9 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+/**
+ * Service that attempts to upload reports to the server.
+ */
 public class IvyReportUploadService extends JobService {
 
     private static final String LOG_TAG = "IVY_UPLOAD_SERVICE";

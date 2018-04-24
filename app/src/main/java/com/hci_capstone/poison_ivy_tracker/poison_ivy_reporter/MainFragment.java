@@ -24,6 +24,10 @@ import java.util.List;
 
 import im.delight.android.location.SimpleLocation;
 
+/**
+ * Fragment for the Poison Ivy on the AT project. This contains another fragment container for the
+ * bottom navigation bar.
+ */
 public class MainFragment extends Fragment implements ReportFragment.OnReportSubmittedListener {
 
     private BottomNavigationView bottomNavigationView;
@@ -152,6 +156,8 @@ public class MainFragment extends Fragment implements ReportFragment.OnReportSub
     public void onDestroy() {
         super.onDestroy();
         fragmentIsAlive = false;
+
+        // Delete unsaved images if the app is shutdown.
         ((ReportFragment) reportFragment).cleanUpImages();
     }
 }

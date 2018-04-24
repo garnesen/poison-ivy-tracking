@@ -95,6 +95,13 @@ public class MainActivity extends AppCompatActivity implements GetLocationListen
         }
     }
 
+    /**
+     * Switches from the current fragment to the given fragment. If addToBackStack is true, the
+     * fragment will be added to the backstack allowing the backbutton to return to the previous
+     * fragment.
+     * @param fragment the fragment to switch to
+     * @param addToBackStack if true, add to backstack
+     */
     private void switchToFragment(Fragment fragment, boolean addToBackStack) {
         FragmentTransaction transaction = getSupportFragmentManager()
                 .beginTransaction()

@@ -13,6 +13,9 @@ import com.firebase.jobdispatcher.JobService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * A service that will attempt to upload the changed settings to the server.
+ */
 public class SettingsSyncService extends JobService {
 
     private final String LOG_TAG = "ITCHY_SETTINGS_SERVICE";

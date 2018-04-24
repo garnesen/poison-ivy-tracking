@@ -7,7 +7,7 @@ import android.util.Log;
 import java.lang.reflect.Field;
 
 /**
- *  Helper class to stop the shifting of icons on the bottom bar
+ *  Helper class to stop the shifting of icons on the bottom bar.
  */
 public class BottomNavigationViewHelper {
     public static void disableShiftMode(BottomNavigationView view) {

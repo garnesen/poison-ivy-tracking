@@ -10,6 +10,9 @@ import android.widget.Button;
 
 import com.hci_capstone.poison_ivy_tracker.R;
 
+/**
+ * Fragment that presents information about Poison Ivy on the AT.
+ */
 public class AboutFragment extends Fragment {
 
     Button linkButton;
