@@ -1,6 +1,7 @@
 package com.hci_capstone.poison_ivy_tracker.poison_ivy_reporter.sync;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -81,13 +82,14 @@ public class IvyReportUploadService extends JobService {
                                 reportsAsArray = reports.toArray(reportsAsArray);
 
                                 // Delete the synced records.
-                                ReportDatabase.getDatabase().deleteReports(new ReportDatabase.OnDeleteCompleted() {
-                                    @Override
-                                    public void onDeleteCompleted() {
-                                        Log.v(LOG_TAG, "Exiting Job: Removed the synced records from local database.");
-                                        jobFinished(params, false);
-                                    }
-                                }, reportsAsArray);
+                                jobFinished(params, false);
+                                //ReportDatabase.getDatabase().deleteReports(new ReportDatabase.OnDeleteCompleted() {
+                                //    @Override
+                                //    public void onDeleteCompleted() {
+                                //        Log.v(LOG_TAG, "Exiting Job: Removed the synced records from local database.");
+                                //        jobFinished(params, false);
+                                //    }
+                                //}, reportsAsArray);
 
                             }
                         },
