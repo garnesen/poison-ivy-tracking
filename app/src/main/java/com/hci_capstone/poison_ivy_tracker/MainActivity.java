@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements GetLocationListen
         InstanceID.init(this);
 
         // New SimpleLocation object, easy access to latitude and longitude.
-        location = new SimpleLocation(getApplicationContext());
+        location = new SimpleLocation(getApplicationContext(), true);
 
         // Check for location permissions.
         if (!hasLocationPermissions()) {
