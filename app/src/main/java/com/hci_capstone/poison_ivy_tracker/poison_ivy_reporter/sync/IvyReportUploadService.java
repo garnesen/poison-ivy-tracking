@@ -95,7 +95,7 @@ public class IvyReportUploadService extends JobService {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Log.v(LOG_TAG, "Rescheduling Job: Error response.\n" + getErrorAsString(error));
-                                jobFinished(params, false);
+                                jobFinished(params, true);
                             }
                         }
                 );

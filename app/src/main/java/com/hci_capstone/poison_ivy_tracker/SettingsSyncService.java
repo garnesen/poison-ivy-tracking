@@ -70,7 +70,7 @@ public class SettingsSyncService extends JobService {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.v(LOG_TAG, "Rescheduling Job: Error response from request: " + error);
-                        jobFinished(params, false);
+                        jobFinished(params, true);
                     }
                 }
         );
