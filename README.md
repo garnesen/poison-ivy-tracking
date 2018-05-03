@@ -45,6 +45,12 @@ When the app is first run, an instance ID is created for the user. This ID can b
 ### Request Handler
 You can queue a request by calling ``RequestHandler.getInstance().addToRequestQueue(...);``. An example can be seen in [SettingsSyncService.java](../master/app/src/main/java/com/hci_capstone/poison_ivy_tracker/SettingsSyncService.java).
 
+### Room Persistence Library
+The [Room](https://developer.android.com/topic/libraries/architecture/room) persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
+
+### Firebase JobDispatcher
+The [Firebase JobDispatcher](https://github.com/firebase/firebase-jobdispatcher-android) is a library for scheduling background jobs in your Android app. It also allows the user of job constraints, such as setting a job to run only when the device is connected to an unmetered network and charging. An example can be seen in [SettingsSyncService.java](../master/app/src/main/java/com/hci_capstone/poison_ivy_tracker/SettingsSyncService.java).
+
 ### Location
 The main activity of the app handles location services. To get access to this object, first add to your fragment the following code:
 ```java
